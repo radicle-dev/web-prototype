@@ -1,52 +1,52 @@
 import React, { Component } from 'react';
-import 'reset-css/reset.css';
 import styled from 'styled-components';
 import Header from './components/Header';
+import CurrencyListItem from './components/CurrencyListItem';
 
 const AppContainer = styled.div`
-  background-color: #f6f7f7;
-`;
-const Grid = styled.div`
   color: #00001e;
   font-family: GT America;
   margin: 0 auto;
   padding: 40px;
   max-width: 960px;
   overflow: auto;
-  > p {
-    padding: 20px;
-  }
+`;
+const GridContainer = styled.div`
+  margin-top: 40px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr;
 `;
 
+const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=20';
+
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: 'React Template',
-      // fetchResults: null
-    };
+  state = {
+    title: 'Currency overview',
+    currencies: null,
+  };
+
+  componentDidMount() {
+    this.fetchCoins();
   }
 
-  // componentDidMount() {
-  //   this.fetchGasStations();
-  // }
-
-  // fetchGasStations() {
-  //   fetch('http://api.test.com')
-  //   .then(response => response.json())
-  //   .then((data) => {
-  //     this.setState({ fetchResults: data });
-  //     console.log('data received');
-  //   });
-  // }
+  async fetchCoins() {
+    await (await fetch(url)).json().then(data => {
+      this.setState({ currencies: data });
+    });
+  }
 
   render() {
+    const { currencies, title } = this.state;
     return (
       <AppContainer>
-        <Grid>
-          <Header title={this.state.title} />
-          <p>Rock &amp; Roll</p>
-        </Grid>
+        <Header title={title} />
+        {currencies && (
+          <GridContainer>
+            <CurrencyListItem topStyle />
+            {currencies.map(currency => <CurrencyListItem key={currency.id} {...currency} />)}
+          </GridContainer>
+        )}
       </AppContainer>
     );
   }

@@ -4,7 +4,7 @@ import Header from './components/Header';
 import CurrencyListItem from './components/CurrencyListItem';
 
 const AppContainer = styled.div`
-  color: #00001e;
+  color: #010101;
   font-family: GT America;
   margin: 0 auto;
   padding: 40px;

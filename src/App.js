@@ -12,10 +12,10 @@ const AppContainer = styled.div`
   overflow: auto;
 `;
 const GridContainer = styled.div`
-  margin-top: 40px;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: 1fr;
+  grid-template-rows: 42px 56px;
 `;
 const ProjectHeader = styled.div`
   padding: 24px;

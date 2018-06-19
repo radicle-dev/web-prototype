@@ -7,7 +7,7 @@ const StyledLink = styled(Link)`
   display: grid;
   grid-gap: 16px;
   grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
-  grid-template-rows: 56px;
+  grid-template-rows: 24px 56px;
   background-color: ${props => (props.topStyle ? null : '#0A0C21')};
   border: 1px solid ${props => (props.topStyle ? '#00000C' : '#1e1f30')};
   border-radius: 3px;

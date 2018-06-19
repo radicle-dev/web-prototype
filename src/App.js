@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Header from './components/Header';
-import CurrencyListItem from './components/CurrencyListItem';
+import RepoListItem from './components/RepoListItem';
 
 const AppContainer = styled.div`
   color: #010101;
-  font-family: GT America;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0 auto;
   padding: 40px;
   max-width: 960px;
@@ -18,12 +18,12 @@ const GridContainer = styled.div`
   grid-template-columns: 1fr;
 `;
 
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=20';
+const url = 'http://localhost:5678';
 
 class App extends Component {
   state = {
-    title: 'Currency overview',
-    currencies: null,
+    title: 'oscoin',
+    repos: null,
   };
 
   componentDidMount() {
@@ -32,19 +32,22 @@ class App extends Component {
 
   async fetchCoins() {
     await (await fetch(url)).json().then(data => {
-      this.setState({ currencies: data });
+      console.log(data);
+
+      this.setState({ repos: data });
     });
   }
 
   render() {
-    const { currencies, title } = this.state;
+    const { repos, title } = this.state;
     return (
       <AppContainer>
         <Header title={title} />
-        {currencies && (
+        <h1>{title}</h1>
+        {repos && (
           <GridContainer>
-            <CurrencyListItem topStyle />
-            {currencies.map(currency => <CurrencyListItem key={currency.id} {...currency} />)}
+            <RepoListItem topStyle />
+            {repos.map(repo => <RepoListItem key={repo.id} {...repo} />)}
           </GridContainer>
         )}
       </AppContainer>

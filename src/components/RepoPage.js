@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const AppContainer = styled.div`
   color: #00001e;
@@ -34,7 +33,7 @@ class RepoPage extends Component {
       <AppContainer>
         <Header>
           <Link to="/">back</Link>
-          <p>{this.props.match.params.currencyId}</p>
+          <p>{this.props.match.params.repoId}</p>
         </Header>
       </AppContainer>
     );

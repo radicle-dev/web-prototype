@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from '../App';
-import Currency from './Currency';
+import RepoPage from './RepoPage';
 import NotFound from './NotFound';
 
 const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
-      <Route exact path="/currency/:currencyId" component={Currency} />
+      <Route exact path="/repo/:repoId" component={RepoPage} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

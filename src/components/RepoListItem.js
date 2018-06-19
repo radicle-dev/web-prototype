@@ -14,13 +14,13 @@ const StyledLink = styled(Link)`
   color: ${props => (props.topStyle ? 'grey' : 'white')};
   padding: 0 24px;
   &:hover {
-    background-color: ${props => (props.topStyle ? null : 'RGBA(0, 116, 232, 1.00)')};
+    background-color: ${props => (props.topStyle ? null : '#007ACC')};
     > h3 {
       text-decoration: underline;
     }
   }
   > h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: ${props => (props.topStyle ? 'regular' : 'bold')};
     align-self: center;
   }

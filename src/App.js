@@ -6,8 +6,7 @@ import RepoListItem from './components/RepoListItem';
 const AppContainer = styled.div`
   color: #010101;
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0 auto;
-  padding: 40px;
+  margin: 16px auto;
   max-width: 960px;
   overflow: auto;
 `;
@@ -18,10 +17,11 @@ const GridContainer = styled.div`
   grid-template-rows: 42px 56px;
 `;
 const ProjectHeader = styled.div`
+  margin: 48px 0 24px;
   padding: 24px;
   > h1 {
     color: white;
-    font-size: 24px;
+    font-size: 42px;
     font-weight: bold;
   }
 `;

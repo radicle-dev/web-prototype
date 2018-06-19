@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -22,15 +22,14 @@ const Circle = styled.header`
   border-radius: 3em;
 `;
 
-const Header = props => (
+const Header = () => (
   <HeaderContainer>
     <Circle />
-    <h1>{props.title}</h1>
   </HeaderContainer>
 );
 
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-};
+// Header.propTypes = {
+//   title: PropTypes.string.isRequired,
+// };
 
 export default Header;

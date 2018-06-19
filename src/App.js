@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Header from './components/Header';
+import AppHeader from './components/AppHeader';
 import RepoListItem from './components/RepoListItem';
 
 const AppContainer = styled.div`
@@ -50,7 +50,7 @@ class App extends Component {
     const { repos, title } = this.state;
     return (
       <AppContainer>
-        <Header title={title} />
+        <AppHeader />
         <ProjectHeader>
           <h1>{title}</h1>
         </ProjectHeader>

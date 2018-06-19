@@ -22,14 +22,14 @@ const Circle = styled.header`
   border-radius: 3em;
 `;
 
-const Header = () => (
+const AppHeader = () => (
   <HeaderContainer>
     <Circle />
   </HeaderContainer>
 );
 
-// Header.propTypes = {
+// AppHeader.propTypes = {
 //   title: PropTypes.string.isRequired,
 // };
 
-export default Header;
+export default AppHeader;

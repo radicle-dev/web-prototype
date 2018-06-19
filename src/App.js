@@ -17,6 +17,14 @@ const GridContainer = styled.div`
   grid-gap: 16px;
   grid-template-columns: 1fr;
 `;
+const ProjectHeader = styled.div`
+  padding: 24px;
+  > h1 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+`;
 
 const url = 'http://localhost:5678';
 
@@ -43,7 +51,9 @@ class App extends Component {
     return (
       <AppContainer>
         <Header title={title} />
-        <h1>{title}</h1>
+        <ProjectHeader>
+          <h1>{title}</h1>
+        </ProjectHeader>
         {repos && (
           <GridContainer>
             <RepoListItem topStyle />

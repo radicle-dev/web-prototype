@@ -31,7 +31,7 @@ const StyledLink = styled(Link)`
 const Stats = styled.p`
   text-align: right;
 `;
-const OscoinIcon = styled.div`
+const OscoinIcon = styled.span`
   font-size: 2.4em; /* This controls the size. */
   display: inline-block;
   width: 0.4em;

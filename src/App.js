@@ -26,7 +26,7 @@ const ProjectHeader = styled.div`
   }
 `;
 
-const url = 'http://localhost:5678';
+const url = 'http://localhost:5678/repos';
 
 class App extends Component {
   state = {

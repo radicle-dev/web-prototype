@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -27,16 +28,16 @@ const Header = styled.header`
   }
 `;
 
-class RepoPage extends Component {
-  render() {
-    return (
-      <AppContainer>
-        <Header>
-          <Link to="/">back</Link>
-          <p>{this.props.match.params.repoId}</p>
-        </Header>
-      </AppContainer>
-    );
-  }
-}
+const RepoPage = props => (
+  <AppContainer>
+    <Header>
+      <Link to="/">back</Link>
+      <p>{props.match.params.repoId}</p>
+    </Header>
+  </AppContainer>
+);
+
+RepoPage.propTypes = {
+  match: PropTypes.string.isRequired,
+};
 export default RepoPage;

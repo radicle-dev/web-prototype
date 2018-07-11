@@ -4,10 +4,8 @@ import AppHeader from './components/AppHeader';
 import RepoListItem from './components/RepoListItem';
 
 const AppContainer = styled.div`
-  color: #010101;
+  background-color: #010101;
   font-family: Arial, Helvetica, sans-serif;
-  margin: 16px auto;
-  max-width: 960px;
   overflow: auto;
 `;
 const GridContainer = styled.div`
@@ -15,10 +13,13 @@ const GridContainer = styled.div`
   grid-gap: 16px;
   grid-template-columns: 1fr;
   grid-template-rows: 42px 56px;
+  margin: 0 auto;
+  max-width: 1060px;
 `;
 const ProjectHeader = styled.div`
-  margin: 48px 0 24px;
-  padding: 24px;
+  padding: 16px;
+  margin: 48px auto 24px;
+  max-width: 1060px;
   > h1 {
     color: white;
     font-size: 42px;
@@ -35,10 +36,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.fetchCoins();
+    this.fetchRepos();
   }
 
-  async fetchCoins() {
+  async fetchRepos() {
     await (await fetch(url)).json().then(data => {
       console.log(data);
 

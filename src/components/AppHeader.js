@@ -1,46 +1,74 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 8fr 1fr 1fr;
-  grid-template-rows: 56px;
-  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   color: white;
-  border-radius: 3px;
-  padding: 0 24px;
+  padding: 0 16px;
   align-items: center;
-  > h1 {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  > p {
-    text-align: right;
-    color: grey;
-  }
+  background-color: red;
+  height: 64px;
+  margin: 0 auto;
+  max-width: 1060px;
 `;
-const Circle = styled.header`
-  font-size: 6em; /* This controls the size. */
+
+const Circle = styled.div`
+  font-size: 1.5em; /* This controls the size. */
   display: inline-block;
-  width: 0.4em;
-  height: 0.4em;
-  border: 0.03em solid white;
+  width: 1em;
+  height: 1em;
+  border: 0.1em solid white;
   position: relative;
   border-radius: 3em;
 `;
+const ProjectPickerContainer = styled.div`
+  display: grid;
+  height: 36px;
+  padding: 4px 16px;
+  border: 1px solid white;
+  border-radius: 4px;
+  align-items: center;
+`;
+
+const TopBarMenuContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  p > {
+    padding-right: 24px;
+  }
+`;
+const TopBarMenuItem = styled.p`
+  padding-right: 24px;
+`;
+
+const ProjectPicker = props => (
+  <ProjectPickerContainer>
+    <div>{props.project}</div>
+  </ProjectPickerContainer>
+);
+
+const TopBarMenu = () => (
+  <TopBarMenuContainer>
+    <TopBarMenuItem>Account</TopBarMenuItem>
+    <TopBarMenuItem>Wallet</TopBarMenuItem>
+    <Circle />
+  </TopBarMenuContainer>
+);
 
 const AppHeader = () => (
   <HeaderContainer>
-    <Circle />
-    <p>Issues</p>
-    <p>Wallet</p>
+    <ProjectPicker project="oscoin" />
+    <TopBarMenu />
   </HeaderContainer>
 );
 
-// AppHeader.propTypes = {
-//   title: PropTypes.string.isRequired,
-// };
+ProjectPicker.propTypes = {
+  project: PropTypes.string.isRequired,
+};
 
 export default AppHeader;

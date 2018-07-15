@@ -8,20 +8,19 @@ const StyledLink = styled(Link)`
   grid-gap: 16px;
   grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
   grid-template-rows: 56px;
-  background-color: ${props => (props.topStyle ? null : '#0A0C21')};
-  border: 1px solid ${props => (props.topStyle ? '#00000C' : '#1e1f30')};
-  border-radius: 3px;
-  color: ${props => (props.topStyle ? 'grey' : 'white')};
+  background-color: ${props => (props.id % 2 ? null : '#FAFAFA')};
+  /* border-radius: 3px; */
+  color: #010101;
   padding: 0 24px;
   &:hover {
-    background-color: ${props => (props.topStyle ? null : '#007ACC')};
+    background-color: #e5e5e5;
     > h3 {
       text-decoration: underline;
     }
   }
   > h3 {
     font-size: 16px;
-    font-weight: ${props => (props.topStyle ? 'regular' : 'bold')};
+    font-weight: bold;
     align-self: center;
   }
   > p {
@@ -36,7 +35,7 @@ const OscoinIcon = styled.span`
   display: inline-block;
   width: 0.4em;
   height: 0.4em;
-  border: 0.05em solid ${props => (props.topStyle ? 'grey' : 'white')};
+  border: 0.05em solid #010101;
   position: relative;
   border-radius: 1.2em;
   margin-right: 8px;
@@ -44,14 +43,14 @@ const OscoinIcon = styled.span`
 `;
 
 const RepoListItem = props => (
-  <StyledLink to={props.topStyle ? `/` : `/repo/${props.name}`} params={{ props }} topStyle={props.topStyle}>
-    <h3>{!props.topStyle ? props.name : 'name'}</h3>
-    <p>{!props.topStyle ? props.description : 'description'}</p>
-    <Stats>⑂ {!props.topStyle ? props.forks : 'forks'}</Stats>
-    <Stats>⭑ {!props.topStyle ? props.stars : 'stars'}</Stats>
+  <StyledLink to={`/repo/${props.name}`} params={{ props }} topStyle={props.topStyle} id={props.id}>
+    <h3>{props.name}</h3>
+    <p>{props.description}</p>
+    <Stats>⑂ {props.forks}</Stats>
+    <Stats>⭑ {props.stars}</Stats>
     <Stats>
       <OscoinIcon />
-      {!props.topStyle ? props.OSC : 'OSC'}
+      {props.OSC}
     </Stats>
   </StyledLink>
 );
@@ -60,25 +59,25 @@ RepoListItem.defaultProps = {
   name: 'oscoin',
   topStyle: false,
   description: 'the open source coin',
-  // owner: 'monadic',
-  // last_updated: '1529425176',
   stars: '8390',
   forks: '2303',
-  // license: 'GPL',
   OSC: null,
+  // owner: 'monadic',
+  // last_updated: '1529425176',
+  // license: 'GPL',
 };
 
 RepoListItem.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   topStyle: PropTypes.bool,
-  // id: PropTypes.number,
-  // owner: PropTypes.string,
-  // last_updated: PropTypes.string,
   stars: PropTypes.string,
   forks: PropTypes.string,
-  // license: PropTypes.string,
   OSC: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  // owner: PropTypes.string,
+  // last_updated: PropTypes.string,
+  // license: PropTypes.string,
 };
 
 export default RepoListItem;

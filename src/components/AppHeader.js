@@ -9,10 +9,10 @@ const HeaderContainer = styled.header`
   color: white;
   padding: 0 16px;
   align-items: center;
-  background-color: red;
+  background-color: #21252b;
   height: 64px;
   margin: 0 auto;
-  max-width: 1060px;
+  max-width: 100%;
 `;
 
 const Circle = styled.div`

@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8,
@@ -13,9 +9,7 @@
       "classes": true
     }
   },
-  "plugins": [
-    "prettier"
-  ],
+  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "jasmine": true,
@@ -30,10 +24,7 @@
         "argsIgnorePattern": "res|next|^err"
       }
     ],
-    "arrow-body-style": [
-      2,
-      "as-needed"
-    ],
+    "arrow-body-style": [2, "as-needed"],
     "no-param-reassign": [
       2,
       {
@@ -54,14 +45,12 @@
     "react/react-in-jsx-scope": 0,
     "react/forbid-prop-types": 0,
     "react/no-unescaped-entities": 0,
+    "react/prefer-stateless-function": 0,
     "jsx-a11y/accessible-emoji": 0,
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "radix": 0,
@@ -69,14 +58,7 @@
       2,
       {
         "hoist": "all",
-        "allow": [
-          "resolve",
-          "reject",
-          "done",
-          "next",
-          "err",
-          "error"
-        ]
+        "allow": ["resolve", "reject", "done", "next", "err", "error"]
       }
     ],
     "quotes": [
@@ -99,9 +81,7 @@
     "jsx-a11y/anchor-is-valid": [
       "warn",
       {
-        "aspects": [
-          "invalidHref"
-        ]
+        "aspects": ["invalidHref"]
       }
     ]
   }

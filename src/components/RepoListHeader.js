@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const RepoListHeader = () => (
+  <ListHeader>
+    <h3>name</h3>
+    <p>description</p>
+    <span>forks</span>
+    <span>stars</span>
+    <span>OSC</span>
+  </ListHeader>
+);
+
 const ListHeader = styled.div`
   display: grid;
   grid-gap: 16px;
@@ -16,33 +26,10 @@ const ListHeader = styled.div`
   > p {
     align-self: center;
   }
+  > span {
+    align-self: center;
+    text-align: right;
+  }
 `;
-const Stats = styled.p`
-  text-align: right;
-`;
-const OscoinIcon = styled.span`
-  font-size: 2.4em; /* This controls the size. */
-  display: inline-block;
-  width: 0.4em;
-  height: 0.4em;
-  border: 0.05em solid grey;
-  position: relative;
-  border-radius: 1.2em;
-  margin-right: 8px;
-  top: 1.5px;
-`;
-
-const RepoListHeader = () => (
-  <ListHeader>
-    <h3>name</h3>
-    <p>description</p>
-    <Stats>⑂ forks</Stats>
-    <Stats>⭑ stars</Stats>
-    <Stats>
-      <OscoinIcon />
-      OSC
-    </Stats>
-  </ListHeader>
-);
 
 export default RepoListHeader;

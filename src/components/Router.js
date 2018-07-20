@@ -8,6 +8,8 @@ const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
+      <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
+      <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
       <Route exact path="/repo/:repoId" component={RepoPage} />
       <Route component={NotFound} />
     </Switch>

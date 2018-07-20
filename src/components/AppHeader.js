@@ -1,13 +1,66 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Toggle } from '../Utils';
+
+const ProjectPicker = () => (
+  <ProjectPickerContainer>
+    <Toggle>
+      {({ on, toggle }) => (
+        <Fragment>
+          <button onClick={toggle}>oscoin</button>
+          {on && (
+            <Dropdown>
+              <NavItem activeClassName="active" to="/">
+                oscoin
+              </NavItem>
+              <NavItem activeClassName="active" to="/juliendonck">
+                juliendonck
+              </NavItem>
+              <NavItem activeClassName="active" to="/daimler">
+                daimler
+              </NavItem>
+            </Dropdown>
+          )}
+        </Fragment>
+      )}
+    </Toggle>
+  </ProjectPickerContainer>
+);
+
+const TopBarMenu = () => (
+  <TopBarMenuContainer>
+    <p>Account</p>
+    <p>Wallet</p>
+    <Circle />
+  </TopBarMenuContainer>
+);
+
+const AppHeader = () => (
+  <HeaderContainer>
+    <ProjectPicker />
+    <TopBarMenu />
+  </HeaderContainer>
+);
+
+ProjectPicker.propTypes = {
+  project: PropTypes.string.isRequired,
+};
+
+const NavItem = styled(NavLink)`
+  margin: 5px;
+  &.active {
+    color: blueviolet;
+  }
+`;
 
 const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: white;
-  padding: 0 16px;
+  padding: 0 24px;
   align-items: center;
   background-color: #21252b;
   height: 64px;
@@ -24,13 +77,20 @@ const Circle = styled.div`
   position: relative;
   border-radius: 3em;
 `;
+const Dropdown = styled.nav`
+  background-color: #21252b;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+`;
 const ProjectPickerContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   height: 36px;
   padding: 4px 16px;
   border: 1px solid white;
-  border-radius: 4px;
-  align-items: center;
+  border-radius: 3px;
+  justify-content: center;
 `;
 
 const TopBarMenuContainer = styled.div`
@@ -38,37 +98,9 @@ const TopBarMenuContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  p > {
+  > p {
     padding-right: 24px;
   }
 `;
-const TopBarMenuItem = styled.p`
-  padding-right: 24px;
-`;
-
-const ProjectPicker = props => (
-  <ProjectPickerContainer>
-    <div>{props.project}</div>
-  </ProjectPickerContainer>
-);
-
-const TopBarMenu = () => (
-  <TopBarMenuContainer>
-    <TopBarMenuItem>Account</TopBarMenuItem>
-    <TopBarMenuItem>Wallet</TopBarMenuItem>
-    <Circle />
-  </TopBarMenuContainer>
-);
-
-const AppHeader = () => (
-  <HeaderContainer>
-    <ProjectPicker project="oscoin" />
-    <TopBarMenu />
-  </HeaderContainer>
-);
-
-ProjectPicker.propTypes = {
-  project: PropTypes.string.isRequired,
-};
 
 export default AppHeader;

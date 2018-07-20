@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Layout from './Layout';
+// import { Toggle } from '../Utils';
+import { Layout, ProjectHeader } from '../Elements';
 
-const Header = styled.header`
-  margin-bottom: 40px;
-  padding: 24px;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 40px 1fr;
-  background-color: #21252b;
-  border: 1px solid #1e1f30;
-  border-radius: 3px;
-  color: ${props => (props.topStyle ? 'grey' : 'white')};
-  > p {
-    text-align: center;
+export default class RepoPage extends Component {
+  render() {
+    return (
+      <Layout>
+        <ProjectHeader>
+          <Link to="/">oscoin/{this.props.match.params.repoId}</Link>
+        </ProjectHeader>
+        <div />
+      </Layout>
+    );
   }
-`;
-
-const RepoPage = props => (
-  <Layout>
-    <Header>
-      <Link to="/">back</Link>
-      <p>{props.match.params.repoId}</p>
-    </Header>
-  </Layout>
-);
+}
 
 RepoPage.propTypes = {
-  match: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
 };
-export default RepoPage;

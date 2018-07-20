@@ -3,6 +3,42 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const RepoListItem = props => (
+  <StyledLink to={`/repo/${props.name}`} params={{ props }} id={props.id}>
+    <h3>{props.name}</h3>
+    <p>{props.description}</p>
+    <Stats>⑂ {props.forks}</Stats>
+    <Stats>⭑ {props.stars}</Stats>
+    <Stats>
+      <OscoinIcon />
+      {props.OSC}
+    </Stats>
+  </StyledLink>
+);
+
+RepoListItem.defaultProps = {
+  name: 'oscoin',
+  description: 'the open source coin',
+  stars: '8390',
+  forks: '2303',
+  OSC: null,
+  // owner: 'monadic',
+  // last_updated: '1529425176',
+  // license: 'GPL',
+};
+
+RepoListItem.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
+  stars: PropTypes.string,
+  forks: PropTypes.string,
+  OSC: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  // owner: PropTypes.string,
+  // last_updated: PropTypes.string,
+  // license: PropTypes.string,
+};
+
 const StyledLink = styled(Link)`
   display: grid;
   grid-gap: 16px;
@@ -41,43 +77,5 @@ const OscoinIcon = styled.span`
   margin-right: 8px;
   top: 1.5px;
 `;
-
-const RepoListItem = props => (
-  <StyledLink to={`/repo/${props.name}`} params={{ props }} topStyle={props.topStyle} id={props.id}>
-    <h3>{props.name}</h3>
-    <p>{props.description}</p>
-    <Stats>⑂ {props.forks}</Stats>
-    <Stats>⭑ {props.stars}</Stats>
-    <Stats>
-      <OscoinIcon />
-      {props.OSC}
-    </Stats>
-  </StyledLink>
-);
-
-RepoListItem.defaultProps = {
-  name: 'oscoin',
-  topStyle: false,
-  description: 'the open source coin',
-  stars: '8390',
-  forks: '2303',
-  OSC: null,
-  // owner: 'monadic',
-  // last_updated: '1529425176',
-  // license: 'GPL',
-};
-
-RepoListItem.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-  topStyle: PropTypes.bool,
-  stars: PropTypes.string,
-  forks: PropTypes.string,
-  OSC: PropTypes.string,
-  id: PropTypes.number.isRequired,
-  // owner: PropTypes.string,
-  // last_updated: PropTypes.string,
-  // license: PropTypes.string,
-};
 
 export default RepoListItem;

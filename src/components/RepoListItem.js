@@ -53,6 +53,7 @@ const StyledLink = styled(Link)`
     background-color: ${colors.lightGrey};
     > h3 {
       text-decoration: underline;
+      color: ${colors.blue};
     }
   }
   > h3 {

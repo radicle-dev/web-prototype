@@ -1,7 +1,7 @@
 export const black = '#333';
 export const almostBlack = '#21252b';
-export const darkGrey = '#828282';
-export const grey = '#bdbdbd';
+export const darkGrey = '#4f4f4f';
+export const grey = '#828282';
 export const lightGrey = '#f2f2f2';
 export const almostWhite = '#fafafa';
 export const white = '#fff';

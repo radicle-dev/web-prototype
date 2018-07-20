@@ -78,7 +78,7 @@ const Circle = styled.div`
   border-radius: 3em;
 `;
 const Dropdown = styled.nav`
-  background-color: ${colors.darkGrey};
+  background-color: ${colors.almostBlack};
   display: flex;
   flex-direction: column;
   z-index: 10;

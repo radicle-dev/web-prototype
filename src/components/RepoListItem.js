@@ -73,7 +73,7 @@ const OscoinIcon = styled.span`
   display: inline-block;
   width: 0.4em;
   height: 0.4em;
-  border: 0.05em solid ${colors.almostBlack};
+  border: 0.05em solid ${colors.darkGrey};
   position: relative;
   border-radius: 1.2em;
   margin-right: 8px;

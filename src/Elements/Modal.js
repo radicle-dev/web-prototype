@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Portal, absolute } from '../Utils';
+import { Portal, absolute, colors } from '../Utils';
 import Icon from './Icon';
 import { Card } from './Cards';
 
@@ -59,6 +59,6 @@ const Background = styled.div`
   ${absolute({})};
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: ${colors.black};
   opacity: 0.35;
 `;

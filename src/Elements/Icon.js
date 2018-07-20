@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { colors } from '../Utils';
 
 export default class Icon extends Component {
   static defaultProps = {
-    color: 'black',
+    color: colors.grey,
   };
   render() {
     switch (this.props.name) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { colors } from '../Utils';
 
 const RepoListItem = props => (
   <StyledLink to={`/repo/${props.name}`} params={{ props }} id={props.id}>
@@ -44,23 +45,23 @@ const StyledLink = styled(Link)`
   grid-gap: 16px;
   grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
   grid-template-rows: 56px;
-  background-color: ${props => (props.id % 2 ? null : '#FAFAFA')};
+  background-color: ${props => (props.id % 2 ? null : colors.almostWhite)};
   /* border-radius: 3px; */
-  color: #010101;
+  color: ${colors.black};
   padding: 0 24px;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: ${colors.lightGrey};
     > h3 {
       text-decoration: underline;
     }
   }
   > h3 {
     font-size: 16px;
-    font-weight: bold;
     align-self: center;
   }
   > p {
     align-self: center;
+    color: ${colors.darkGrey};
   }
 `;
 const Stats = styled.p`
@@ -71,7 +72,7 @@ const OscoinIcon = styled.span`
   display: inline-block;
   width: 0.4em;
   height: 0.4em;
-  border: 0.05em solid #010101;
+  border: 0.05em solid ${colors.almostBlack};
   position: relative;
   border-radius: 1.2em;
   margin-right: 8px;

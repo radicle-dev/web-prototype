@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Toggle } from '../Utils';
+import { Toggle, colors } from '../Utils';
 
 const ProjectPicker = () => (
   <ProjectPickerContainer>
@@ -51,7 +51,7 @@ ProjectPicker.propTypes = {
 const NavItem = styled(NavLink)`
   margin: 5px;
   &.active {
-    color: blueviolet;
+    color: ${colors.blue};
   }
 `;
 
@@ -59,10 +59,10 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: white;
+  color: ${colors.white};
   padding: 0 24px;
   align-items: center;
-  background-color: #21252b;
+  background-color: ${colors.almostBlack};
   height: 64px;
   margin: 0 auto;
   max-width: 100%;
@@ -78,7 +78,7 @@ const Circle = styled.div`
   border-radius: 3em;
 `;
 const Dropdown = styled.nav`
-  background-color: #21252b;
+  background-color: ${colors.darkGrey};
   display: flex;
   flex-direction: column;
   z-index: 10;

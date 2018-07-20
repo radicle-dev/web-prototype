@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../Utils';
 
 const RepoListHeader = () => (
   <ListHeader>
@@ -16,7 +17,7 @@ const ListHeader = styled.div`
   grid-gap: 16px;
   grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
   grid-template-rows: 56px;
-  color: grey;
+  color: ${colors.grey};
   padding: 0 24px;
   > h3 {
     font-size: 16px;

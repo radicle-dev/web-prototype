@@ -5,22 +5,20 @@ import PropTypes from 'prop-types';
 import { colors } from '../Utils';
 
 const RepoListItem = props => (
-  <StyledLink to={`/repo/${props.name}`} params={{ props }} id={props.id}>
+  <ListItem to={`/repo/${props.name}`} id={props.id}>
     <h3>{props.name}</h3>
     <p>{props.description}</p>
     <Stats>⑂ {props.forks}</Stats>
-    <Stats>⭑ {props.stars}</Stats>
     <Stats>
       <OscoinIcon />
       {props.OSC}
     </Stats>
-  </StyledLink>
+  </ListItem>
 );
 
 RepoListItem.defaultProps = {
   name: 'oscoin',
   description: 'the open source coin',
-  stars: '8390',
   forks: '2303',
   OSC: null,
   // owner: 'monadic',
@@ -31,19 +29,17 @@ RepoListItem.defaultProps = {
 RepoListItem.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
-  stars: PropTypes.string,
   forks: PropTypes.string,
   OSC: PropTypes.string,
-  id: PropTypes.number.isRequired,
   // owner: PropTypes.string,
   // last_updated: PropTypes.string,
   // license: PropTypes.string,
 };
 
-const StyledLink = styled(Link)`
+const ListItem = styled(Link)`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 4fr 1fr 1fr;
   grid-template-rows: 56px;
   background-color: ${props => (props.id % 2 ? null : colors.almostWhite)};
   /* border-radius: 3px; */

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RepoListHeader from './RepoListHeader';
 import RepoListItem from './RepoListItem';
@@ -17,6 +18,10 @@ const OrgPage = props => (
     )}
   </Layout>
 );
+
+OrgPage.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 const GridContainer = styled.div`
   display: grid;

@@ -31,6 +31,7 @@ RepoListItem.propTypes = {
   description: PropTypes.string,
   forks: PropTypes.string,
   OSC: PropTypes.string,
+  id: PropTypes.number.isRequired,
   // owner: PropTypes.string,
   // last_updated: PropTypes.string,
   // license: PropTypes.string,

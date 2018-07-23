@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import RepoListHeader from './Components/RepoListHeader';
-import RepoListItem from './Components/RepoListItem';
-import { Layout, ProjectHeader } from './Elements';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import OrgPage from './Components/OrgPage';
+import RepoPage from './Components/RepoPage';
+import NotFound from './Components/NotFound';
 
 const url = 'http://localhost:5678/';
 
 class App extends Component {
   state = {
-    title: 'oscoin',
     data: null,
   };
 
@@ -24,29 +23,19 @@ class App extends Component {
   }
 
   render() {
-    const { data, title } = this.state;
+    const { data } = this.state;
     return (
-      <Layout>
-        <ProjectHeader>
-          <h1>{title}</h1>
-        </ProjectHeader>
-        {data && (
-          <GridContainer>
-            <RepoListHeader />
-            {data.repos.map(repo => <RepoListItem key={repo.id} {...repo} />)}
-          </GridContainer>
-        )}
-      </Layout>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={props => <OrgPage {...props} data={data} />} />
+          <Route exact path="/repo/:repoId" render={props => <RepoPage {...props} data={data} />} />
+          <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
+          <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 56px;
-  margin: 0 auto;
-  max-width: 100%;
-`;
 
 export default App;

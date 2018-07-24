@@ -2,83 +2,79 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-const StyledLink = styled(Link)`
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
-  grid-template-rows: 56px;
-  background-color: ${props => (props.topStyle ? null : '#0A0C21')};
-  border: 1px solid ${props => (props.topStyle ? '#00000C' : '#1e1f30')};
-  border-radius: 3px;
-  color: ${props => (props.topStyle ? 'grey' : 'white')};
-  padding: 0 24px;
-  &:hover {
-    background-color: ${props => (props.topStyle ? null : 'RGBA(0, 116, 232, 1.00)')};
-    > h3 {
-      text-decoration: underline;
-    }
-  }
-  > h3 {
-    font-size: 18px;
-    font-weight: ${props => (props.topStyle ? 'regular' : 'bold')};
-    align-self: center;
-  }
-  > p {
-    align-self: center;
-  }
-`;
-const Stats = styled.p`
-  text-align: right;
-`;
-const OscoinIcon = styled.div`
-  font-size: 2.4em; /* This controls the size. */
-  display: inline-block;
-  width: 0.4em;
-  height: 0.4em;
-  border: 0.05em solid ${props => (props.topStyle ? 'grey' : 'white')};
-  position: relative;
-  border-radius: 1.2em;
-  margin-right: 8px;
-  top: 1.5px;
-`;
+import { colors } from '../Utils';
 
 const RepoListItem = props => (
-  <StyledLink to={props.topStyle ? `/` : `/currency/${props.name}`} params={{ props }} topStyle={props.topStyle}>
-    <h3>{!props.topStyle ? props.name : 'name'}</h3>
-    <p>{!props.topStyle ? props.description : 'description'}</p>
-    <Stats>⑂ {!props.topStyle ? props.forks : 'forks'}</Stats>
-    <Stats>⭑ {!props.topStyle ? props.stars : 'stars'}</Stats>
+  <ListItem to={`/repo/${props.name}`} id={props.id}>
+    <h3>{props.name}</h3>
+    <p>{props.description}</p>
+    <Stats>⑂ {props.forks}</Stats>
     <Stats>
       <OscoinIcon />
-      {!props.topStyle ? props.OSC : 'OSC'}
+      {props.OSC}
     </Stats>
-  </StyledLink>
+  </ListItem>
 );
 
 RepoListItem.defaultProps = {
   name: 'oscoin',
-  topStyle: false,
   description: 'the open source coin',
+  forks: '2303',
+  OSC: null,
   // owner: 'monadic',
   // last_updated: '1529425176',
-  stars: '8390',
-  forks: '2303',
   // license: 'GPL',
-  OSC: null,
 };
 
 RepoListItem.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
-  topStyle: PropTypes.bool,
-  // id: PropTypes.number,
+  forks: PropTypes.string,
+  OSC: PropTypes.string,
+  id: PropTypes.number.isRequired,
   // owner: PropTypes.string,
   // last_updated: PropTypes.string,
-  stars: PropTypes.string,
-  forks: PropTypes.string,
   // license: PropTypes.string,
-  OSC: PropTypes.string,
 };
+
+const ListItem = styled(Link)`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 2fr 4fr 1fr 1fr;
+  grid-template-rows: 56px;
+  background-color: ${props => (props.id % 2 ? null : colors.almostWhite)};
+  /* border-radius: 3px; */
+  color: ${colors.black};
+  padding: 0 24px;
+  &:hover {
+    background-color: ${colors.lightGrey};
+    > h3 {
+      text-decoration: underline;
+      color: ${colors.blue};
+    }
+  }
+  > h3 {
+    font-size: 16px;
+    align-self: center;
+  }
+  > p {
+    align-self: center;
+    color: ${colors.darkGrey};
+  }
+`;
+const Stats = styled.p`
+  text-align: right;
+`;
+const OscoinIcon = styled.span`
+  font-size: 2.4em; /* This controls the size. */
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border: 0.05em solid ${colors.darkGrey};
+  position: relative;
+  border-radius: 1.2em;
+  margin-right: 8px;
+  top: 1.5px;
+`;
 
 export default RepoListItem;

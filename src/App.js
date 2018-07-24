@@ -1,56 +1,42 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Header from './components/Header';
-import RepoListItem from './components/RepoListItem';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import OrgPage from './Components/OrgPage';
+import RepoPage from './Components/RepoPage';
+import NotFound from './Components/NotFound';
 
-const AppContainer = styled.div`
-  color: #010101;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0 auto;
-  padding: 40px;
-  max-width: 960px;
-  overflow: auto;
-`;
-const GridContainer = styled.div`
-  margin-top: 40px;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 1fr;
-`;
-
-const url = 'http://localhost:5678';
+const url = 'http://localhost:5678/';
 
 class App extends Component {
   state = {
-    title: 'oscoin',
-    repos: null,
+    data: null,
   };
 
   componentDidMount() {
-    this.fetchCoins();
+    this.fetchRepos();
   }
 
-  async fetchCoins() {
+  async fetchRepos() {
     await (await fetch(url)).json().then(data => {
-      console.log(data);
-
-      this.setState({ repos: data });
+      this.setState({ data });
     });
   }
 
   render() {
-    const { repos, title } = this.state;
+    const { data } = this.state;
     return (
-      <AppContainer>
-        <Header title={title} />
-        <h1>{title}</h1>
-        {repos && (
-          <GridContainer>
-            <RepoListItem topStyle />
-            {repos.map(repo => <RepoListItem key={repo.id} {...repo} />)}
-          </GridContainer>
+      <Fragment>
+        {data && (
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" render={props => <OrgPage {...props} data={data} />} />
+              <Route exact path="/repo/:repoId" render={props => <RepoPage {...props} data={data} />} />
+              <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
+              <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
+              <Route component={NotFound} />
+            </Switch>
+          </BrowserRouter>
         )}
-      </AppContainer>
+      </Fragment>
     );
   }
 }

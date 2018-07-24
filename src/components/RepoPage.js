@@ -10,7 +10,7 @@ const FileBrowserListItem = props => (
   <FileBrowserListItemContainer id={props.id}>
     {props.type === 'dir' ? <Icon name="folder" /> : <Icon name="file" />}
     <h3>{props.name}</h3>
-    <p>latest commit message test</p>
+    <p>latest commit message</p>
     <p>
       <Timestamp time={props.last_updated} />
     </p>

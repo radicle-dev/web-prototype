@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Toggle, colors } from '../Utils';
 
@@ -43,10 +43,6 @@ const AppHeader = () => (
     <TopBarMenu />
   </HeaderContainer>
 );
-
-ProjectPicker.propTypes = {
-  project: PropTypes.string.isRequired,
-};
 
 const NavItem = styled(NavLink)`
   margin: 5px;

@@ -1,38 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Timestamp from 'react-timestamp';
 import { colors } from '../Utils';
 import { Layout, ProjectHeader, Icon } from '../Elements';
 
-export default class RepoPage extends Component {
-  render() {
-    return (
-      <Layout>
-        <ProjectHeader>
-          <Link to="/">oscoin/{this.props.match.params.repoId}</Link>
-        </ProjectHeader>
-        <FileBrowser>
-          <FileBrowserListItem id={0}>
-            <Icon name="folder" />
-            <h3>foldername</h3>
-            <p>latest commit message</p>
-            <p>3 hours</p>
-          </FileBrowserListItem>
-          <FileBrowserListItem id={1}>
-            <Icon name="file" />
-            <h3>filename</h3>
-            <p>latest commit message</p>
-            <p>2 hours</p>
-          </FileBrowserListItem>
-        </FileBrowser>
-      </Layout>
-    );
-  }
-}
+const FileBrowserListItem = props => (
+  <FileBrowserListItemContainer id={props.id}>
+    {props.type === 'dir' ? <Icon name="folder" /> : <Icon name="file" />}
+    <h3>{props.name}</h3>
+    <p>latest commit message</p>
+    <p>
+      <Timestamp time={props.last_updated} />
+    </p>
+  </FileBrowserListItemContainer>
+);
+
+FileBrowserListItem.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  last_updated: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
+
+const RepoPage = props => {
+  const repo = props.data.repos.filter(repoItem => repoItem.name === props.match.params.repoId)[0];
+  return (
+    <Layout>
+      <ProjectHeader>
+        <Link to="/">oscoin/{props.match.params.repoId}</Link>
+      </ProjectHeader>
+      <FileBrowser>{repo.content.map(file => <FileBrowserListItem key={file.name} {...file} />)}</FileBrowser>
+    </Layout>
+  );
+};
 
 RepoPage.propTypes = {
   match: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 const FileBrowser = styled.div`
@@ -42,7 +48,7 @@ const FileBrowser = styled.div`
   max-width: 100%;
 `;
 
-const FileBrowserListItem = styled.div`
+const FileBrowserListItemContainer = styled.div`
   display: grid;
   grid-gap: 8px;
   grid-template-rows: 56px;
@@ -70,3 +76,5 @@ const FileBrowserListItem = styled.div`
     justify-self: end;
   }
 `;
+
+export default RepoPage;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Timestamp from 'react-timestamp';
 import { colors } from '../Utils';
-import { Layout, ProjectHeader, Icon } from '../Elements';
+import { Layout, BigHeader, Icon } from '../Elements';
 
 const FileBrowserListItem = props => (
   <FileBrowserListItemContainer id={props.id}>
@@ -28,9 +28,9 @@ const RepoPage = props => {
   const repo = props.data.repos.filter(repoItem => repoItem.name === props.match.params.repoId)[0];
   return (
     <Layout>
-      <ProjectHeader>
+      <BigHeader>
         <Link to="/">oscoin/{props.match.params.repoId}</Link>
-      </ProjectHeader>
+      </BigHeader>
       <FileBrowser>{repo.content.map(file => <FileBrowserListItem key={file.name} {...file} />)}</FileBrowser>
     </Layout>
   );

@@ -2,14 +2,17 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Toggle, colors } from '../Utils';
+import { Toggle, colors, elevation } from '../Utils';
 
 const ProjectPicker = () => (
   <ProjectPickerContainer>
     <Toggle>
       {({ on, toggle }) => (
         <Fragment>
-          <button onClick={toggle}>oscoin</button>
+          <ProjectPickerButton onClick={toggle}>
+            <OrgIcon />
+            oscoin
+          </ProjectPickerButton>
           {on && (
             <Dropdown>
               <NavItem activeClassName="active" to="/">
@@ -31,9 +34,9 @@ const ProjectPicker = () => (
 
 const TopBarMenu = () => (
   <TopBarMenuContainer>
-    <p>Account</p>
+    <p>Inbox (36)</p>
     <p>Wallet</p>
-    <Circle />
+    <Circle src="https://res.cloudinary.com/juliendonck/image/upload/v1536080565/avatars/2326909.jpg" />
   </TopBarMenuContainer>
 );
 
@@ -55,38 +58,49 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: ${colors.white};
-  padding: 0 24px;
+  padding: 24px;
   align-items: center;
-  background-color: ${colors.almostBlack};
-  height: 64px;
-  margin: 0 auto;
+  height: 84px;
   max-width: 100%;
 `;
 
-const Circle = styled.div`
-  font-size: 1.5em; /* This controls the size. */
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: 0.1em solid white;
-  position: relative;
-  border-radius: 3em;
+const Circle = styled.img`
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  ${elevation[0]};
 `;
 const Dropdown = styled.nav`
-  background-color: ${colors.almostBlack};
+  background-color: ${colors.almostWhite};
   display: flex;
   flex-direction: column;
   z-index: 10;
+  padding: 12px;
+  border: 1px solid ${colors.lightGrey};
+  border-radius: 4px;
+  margin-top: 8px;
+  ${elevation[0]};
 `;
 const ProjectPickerContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 36px;
-  padding: 4px 16px;
-  border: 1px solid white;
+`;
+
+const ProjectPickerButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+`;
+
+const OrgIcon = styled.div`
+  height: 36px;
+  width: 36px;
+  background-color: ${colors.white};
   border-radius: 3px;
-  justify-content: center;
+  margin-right: 12px;
+  ${elevation[0]};
 `;
 
 const TopBarMenuContainer = styled.div`

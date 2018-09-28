@@ -1,14 +1,10 @@
 import styled from 'styled-components';
-import { elevation, transition, colors } from '../Utils';
+import { elevation } from '../Utils';
 
 export const Card = styled.div`
-  background: white;
-  border-radius: 5px;
-  padding: 16px;
-  color: ${colors.black};
-  ${elevation[3]};
-  ${transition({})};
-  &:hover {
-    ${elevation[4]};
-  }
+  background-color: white;
+  border-radius: 4px;
+  ${elevation[1]};
+  margin-bottom: 24px;
+  margin-right: 24px;
 `;

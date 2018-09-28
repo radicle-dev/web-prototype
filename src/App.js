@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { injectGlobal } from 'styled-components';
+import { colors } from './Utils';
 import OrgPage from './Components/OrgPage';
 import RepoPage from './Components/RepoPage';
 import NotFound from './Components/NotFound';
 
 const url = 'http://localhost:5678/';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     data: null,
   };
@@ -41,4 +43,82 @@ class App extends Component {
   }
 }
 
-export default App;
+injectGlobal([
+  `
+  /* reset.css */
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, button, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  blockquote, q {
+    quotes: none;
+  }
+  blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+    content: none;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /* global styles */
+
+  @font-face {
+    font-family: GTAmerica;
+    src: url("./Utils/fonts/GT America Regular.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: GTAmerica;
+    font-style: italic;
+    src: url("./Utils/fonts/GT America Regular Italic.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: GTAmerica;
+    font-weight: bold;
+    src: url("./Utils/fonts/GT America Medium.otf") format("opentype");
+  }
+  @font-face {
+    font-family: GTAmerica;
+    font-weight: bold;
+    font-style: italic;
+    src: url("./Utils/fonts/GT America Medium Italic.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: GTAmericaMono;
+    src: url("./Utils/fonts/GT America Mono Regular.otf") format("opentype");
+  }
+
+  body {
+    font-family: GTAmerica, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: ${colors.black};
+    background-color: #f2f2f2;
+  }
+`,
+]);

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { colors } from '../Utils';
 
-export default styled.button`
+export const PrimaryButton = styled.button`
   height: 36px;
   font-size: 16px;
   padding: 0 16px;
@@ -21,7 +21,7 @@ export default styled.button`
     background-color: ${colors.almostWhite};
     color: ${colors.lightGrey};
   `} &:hover {
-    background-color: ${colors.darkBlue};
+    background-color: ${colors.blue};
     ${({ disabled }) =>
       disabled &&
       `
@@ -30,9 +30,9 @@ export default styled.button`
     `};
   }
   &:active {
-    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
     ${({ disabled }) =>
       disabled &&
       `
@@ -40,5 +40,18 @@ export default styled.button`
       -moz-box-shadow: none;
       box-shadow: none;
     `};
+  }
+  ${({ margin }) =>
+    margin &&
+    `
+    margin-right: 16px;
+  `};
+`;
+
+export const SecondaryButton = styled(PrimaryButton)`
+  color: ${colors.darkGrey};
+  background-color: ${colors.almostWhite};
+  &:hover {
+    background-color: ${colors.lightGrey};
   }
 `;

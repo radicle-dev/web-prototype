@@ -5,7 +5,7 @@ export const BigHeader = styled.div`
   color: ${colors.black};
   font-size: 24px;
   font-weight: bold;
-  line-height: 32px;
+  line-height: 36px;
 `;
 export const MediumHeader = styled.div`
   color: ${colors.black};
@@ -23,4 +23,9 @@ export const CardHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 24px;
+  ${({ underline }) =>
+    underline &&
+    `
+    border-bottom: 1px solid ${colors.lightGrey};
+  `};
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Portal, absolute, colors } from '../Utils';
 import Icon from './Icon';
-import { Card } from './Cards';
+import { FloatingCard } from './Cards';
 
 export default class Modal extends Component {
   render() {
@@ -41,7 +41,7 @@ const ModalWrapper = styled.div`
   align-items: center;
 `;
 
-const ModalCard = Card.extend`
+const ModalCard = FloatingCard.extend`
   position: relative;
   min-width: 320px;
   z-index: 10;

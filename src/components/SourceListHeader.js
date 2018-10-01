@@ -6,28 +6,26 @@ const RepoListHeader = () => (
   <ListHeader>
     <h3>name</h3>
     <p>description</p>
-    <span>forks</span>
-    <span>OSC</span>
+    <span>Last update</span>
   </ListHeader>
 );
 
 const ListHeader = styled.div`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 2fr 4fr 1fr 1fr;
-  grid-template-rows: 56px;
-  color: ${colors.grey};
+  grid-template-columns: 2fr 5fr 1fr;
+  grid-template-rows: 36px;
+  height: 36px;
+  color: ${colors.darkGrey};
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: ${colors.almostWhite};
+  border-top: 1px solid ${colors.lightGrey};
+  border-bottom: 1px solid ${colors.lightGrey};
   padding: 0 24px;
-  > h3 {
-    font-size: 16px;
-    font-weight: regular;
-    align-self: center;
-  }
-  > p {
-    align-self: center;
-  }
+  align-items: center;
   > span {
-    align-self: center;
     text-align: right;
   }
 `;

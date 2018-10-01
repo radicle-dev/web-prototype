@@ -1,21 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import RepoListHeader from './RepoListHeader';
-import RepoListItem from './RepoListItem';
-import { Layout, ProjectHeader } from '../Elements';
+import SourceListHeader from './SourceListHeader';
+import SourceListItem from './SourceListItem';
+import MemberListItem from './MemberListItem';
+import { Layout, BigHeader, FloatingCard, PrimaryButton, CardHeader, Filter } from '../Elements';
+import { elevation, colors } from '../Utils';
 
 const OrgPage = props => (
   <Layout>
-    <ProjectHeader>
-      <h1>oscoin</h1>
-    </ProjectHeader>
-    {props.data && (
-      <GridContainer>
-        <RepoListHeader />
-        {props.data.repos.map(repo => <RepoListItem key={repo.id} {...repo} />)}
-      </GridContainer>
-    )}
+    <FloatingCard>
+      <CardHeader>
+        <OrgLogo />
+        <div>
+          <BigHeader>oscoin</BigHeader>
+          <OrgDesc>
+            In hac habitasse platea dictumst. Suspendisse potenti. Vestibulum sollicitudin blandit mi, eget tincidunt
+            diam maximus vel. Pellentesque luctus mauris rhoncus, aliquam nunc molestie, consectetur eros. In hac
+            habitasse platea dictumst. Suspendisse potenti. Vestibulum sollicitudin blandit mi, eget tincidunt diam
+            maximus vel. Pellentesque luctus mauris rhoncus, aliquam nunc molestie, consectetur eros.
+          </OrgDesc>
+        </div>
+      </CardHeader>
+    </FloatingCard>
+    <FloatingCard>
+      <CardHeader>
+        <BigHeader>Repositories</BigHeader>
+        <div>
+          <Filter margin value="Filter" />
+          <PrimaryButton>New repository</PrimaryButton>
+        </div>
+      </CardHeader>
+      {props.data && (
+        <RepoGridContainer>
+          <SourceListHeader />
+          {props.data.repos.map(repo => <SourceListItem key={repo.id} {...repo} />)}
+        </RepoGridContainer>
+      )}
+    </FloatingCard>
+    <FloatingCard>
+      <CardHeader underline>
+        <BigHeader>Members</BigHeader>
+        <div>
+          <Filter margin value="Filter" />
+          <PrimaryButton>Add member</PrimaryButton>
+        </div>
+      </CardHeader>
+      {props.data && (
+        <MembersGridContainer>
+          {props.data.users.map(user => <MemberListItem key={user.id} {...user} />)}
+        </MembersGridContainer>
+      )}
+    </FloatingCard>
   </Layout>
 );
 
@@ -23,12 +59,33 @@ OrgPage.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-const GridContainer = styled.div`
+const OrgLogo = styled.div`
+  min-height: 72px;
+  min-width: 72px;
+  max-height: 72px;
+  max-width: 72px;
+  border-radius: 4px;
+  ${elevation[0]};
+  margin-right: 24px;
+`;
+const OrgDesc = styled.p`
+  margin-top: 12px;
+  line-height: 150%;
+  color: ${colors.darkGrey};
+`;
+const RepoGridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 56px;
+  grid-template-rows: 36px 48px;
   margin: 0 auto;
   max-width: 100%;
+  padding-bottom: 12px;
 `;
-
+const MembersGridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-bottom: 12px;
+`;
 export default OrgPage;

@@ -20,7 +20,8 @@ export const PrimaryButton = styled.button`
     `
     background-color: ${colors.almostWhite};
     color: ${colors.lightGrey};
-  `} &:hover {
+  `};
+  &:hover {
     background-color: ${colors.blue};
     ${({ disabled }) =>
       disabled &&

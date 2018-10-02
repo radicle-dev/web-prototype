@@ -10,10 +10,20 @@ export const SmallLabel = styled.p`
   justify-self: end;
 `;
 export const BigLabel = styled.p`
-  color: ${colors.red};
-  border: 1px solid ${colors.red};
+  ${({ pass }) =>
+    pass
+      ? `
+      color: ${colors.green};
+      border: 1px solid ${colors.green};
+    `
+      : `
+      color: ${colors.orange};
+      border: 1px solid ${colors.orange};
+    `};
+
   border-radius: 4px;
-  padding: 9px 12px;
+  padding: 10px 12px;
   justify-self: end;
   height: 36px;
+  font-weight: bold;
 `;

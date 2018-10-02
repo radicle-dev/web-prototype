@@ -21,7 +21,9 @@ const RepoPage = props => {
         </CardHeader>
         <SourceBrowser>
           <SourceListHeader />
-          {repo.content.map(file => <SourceListItem key={file.name} {...file} />)}
+          {repo.content.map(file => (
+            <SourceListItem key={file.name} {...file} />
+          ))}
         </SourceBrowser>
       </FloatingCard>
     </Layout>

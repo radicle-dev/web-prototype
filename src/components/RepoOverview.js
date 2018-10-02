@@ -162,7 +162,7 @@ const LoadMore = styled.div`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
-const RevisionLabel = BigLabel.extend`
+const RevisionLabel = styled(BigLabel)`
   align-self: center;
 `;
 

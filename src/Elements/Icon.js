@@ -6,6 +6,7 @@ export default class Icon extends Component {
   static defaultProps = {
     color: colors.grey,
   };
+
   render() {
     switch (this.props.name) {
       case 'close':

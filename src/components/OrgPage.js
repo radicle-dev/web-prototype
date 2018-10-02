@@ -34,7 +34,9 @@ const OrgPage = props => (
       {props.data && (
         <RepoGridContainer>
           <SourceListHeader />
-          {props.data.repos.map(repo => <SourceListItem key={repo.id} {...repo} />)}
+          {props.data.repos.map(repo => (
+            <SourceListItem key={repo.id} {...repo} />
+          ))}
         </RepoGridContainer>
       )}
     </FloatingCard>
@@ -48,7 +50,9 @@ const OrgPage = props => (
       </CardHeader>
       {props.data && (
         <MembersGridContainer>
-          {props.data.users.map(user => <MemberListItem key={user.id} {...user} />)}
+          {props.data.users.map(user => (
+            <MemberListItem key={user.id} {...user} />
+          ))}
         </MembersGridContainer>
       )}
     </FloatingCard>

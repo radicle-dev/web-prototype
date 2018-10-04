@@ -1,10 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
+import gql from 'graphql-tag';
+import GithubClient from './github-graphql';
 import { colors } from './Utils';
 import OrgPage from './Components/OrgPage';
 import RepoPage from './Components/RepoPage';
 import NotFound from './Components/NotFound';
+
+import Regular from './fonts/GTAmericaRegular.otf';
+import RegularItalic from './fonts/GTAmericaRegularItalic.otf';
+import Medium from './fonts/GTAmericaMedium.otf';
+import MediumItalic from './fonts/GTAmericaMediumItalic.otf';
+import Bold from './fonts/GTAmericaBold.otf';
+import Mono from './fonts/GTAmericaMonoRegular.otf';
 
 const url = 'http://localhost:5678/';
 
@@ -15,9 +24,46 @@ export default class App extends Component {
 
   componentDidMount() {
     this.fetchRepos();
+    // this.fetchMembers();
   }
 
-  async fetchRepos() {
+  fetchRepos = async () => {
+    const response = await GithubClient.query({
+      query: gql`
+        query {
+          organization(login: "oscoin") {
+            id
+            name
+            description
+            avatarUrl
+            repositories(first: 100) {
+              nodes {
+                id
+                name
+                description
+                updatedAt
+              }
+            }
+            members(first: 30) {
+              nodes {
+                id
+                name
+                login
+                avatarUrl
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    this.setState({
+      data: response.data.organization,
+    });
+    console.log(response.data.organization);
+  };
+
+  async fetchMembers() {
     await (await fetch(url)).json().then(data => {
       this.setState({ data });
     });
@@ -138,34 +184,36 @@ injectGlobal([
 
   @font-face {
     font-family: GTAmerica;
-    src: url("./Utils/fonts/GT America Regular.otf") format("opentype");
+    src: url(${Regular}) format("opentype");
   }
 
   @font-face {
     font-family: GTAmerica;
     font-style: italic;
-    src: url("./Utils/fonts/GT America Regular Italic.otf") format("opentype");
+    src: url(${RegularItalic}) format("opentype");
   }
 
   @font-face {
-    font-family: GTAmerica;
-    font-weight: bold;
-    src: url("./Utils/fonts/GT America Medium.otf") format("opentype");
+    font-family: GTAmericaMedium;
+    src: url(${Medium}) format("opentype");
   }
   @font-face {
-    font-family: GTAmerica;
-    font-weight: bold;
+    font-family: GTAmericaMedium;
     font-style: italic;
-    src: url("./Utils/fonts/GT America Medium Italic.otf") format("opentype");
+    src: url(${MediumItalic}) format("opentype");
+  }
+  @font-face {
+    font-family: GTAmericaBold;
+    src: url(${Bold}) format("opentype");
   }
 
   @font-face {
     font-family: GTAmericaMono;
-    src: url("./Utils/fonts/GT America Mono Regular.otf") format("opentype");
+    src: url(${Mono}) format("opentype");
   }
 
   body {
-    font-family: GTAmerica, Arial, Helvetica, sans-serif;
+    font-family: GTAmerica, Helvetica, Arial, sans-serif;
     font-size: 16px;
     color: ${colors.black};
     background-color: #f2f2f2;

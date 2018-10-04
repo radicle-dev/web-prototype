@@ -85,10 +85,11 @@ const SideBar = ({ org, repoId }) => (
 
 SideBar.defaultProps = {
   org: false,
+  repoId: '',
 };
 SideBar.propTypes = {
   org: PropTypes.bool,
-  repoId: PropTypes.string.isRequired,
+  repoId: PropTypes.string,
 };
 
 const SideBarContainer = styled.ul`
@@ -114,7 +115,7 @@ const SideBarItem = styled(NavLink)`
   }
   &.active {
     color: ${colors.purple};
-    font-weight: bold;
+    font-family: GTAmericaBold;
   }
 `;
 

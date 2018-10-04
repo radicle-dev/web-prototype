@@ -13,15 +13,15 @@ const OrgPage = ({ data, selectedView }) => {
       case 'overview':
         return (
           <Fragment>
-            <OrgOverview />
-            <OrgSource repos={data.repos} />
-            <OrgMembers members={data.users} />
+            <OrgOverview orgName={data.name} orgIcon={data.avatarUrl} orgDesc={data.description} />
+            <OrgSource repos={data.repositories.nodes} />
+            <OrgMembers members={data.members.nodes} />
           </Fragment>
         );
       case 'repositories':
-        return <OrgSource repos={data.repos} />;
+        return <OrgSource repos={data.repositories.nodes} />;
       case 'members':
-        return <OrgMembers members={data.users} />;
+        return <OrgMembers members={data.members.nodes} />;
       default:
         return null;
     }

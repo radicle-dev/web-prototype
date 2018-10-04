@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.16",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
     "prop-types": "15.6.2",
     "react": "16.5.2",
     "react-dom": "16.5.2",

@@ -6,7 +6,7 @@ import RepoSource from './RepoSource';
 import SideBar from './SideBar';
 
 const RepoPage = ({ data, match, selectedView }) => {
-  const repo = data.repos.filter(repoItem => repoItem.name === match.params.repoId)[0];
+  const repo = data.repositories.nodes.filter(repoItem => repoItem.name === match.params.repoId)[0];
   const sidebar = <SideBar repoId={repo.name} />;
   const content = () => {
     switch (selectedView) {

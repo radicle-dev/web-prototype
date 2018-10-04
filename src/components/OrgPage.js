@@ -7,7 +7,7 @@ import MemberListItem from './MemberListItem';
 import { Layout, BigHeader, FloatingCard, PrimaryButton, CardHeader, Filter } from '../Elements';
 import { elevation, colors } from '../Utils';
 
-const OrgPage = props => (
+const OrgPage = ({ data }) => (
   <Layout>
     <FloatingCard>
       <CardHeader>
@@ -27,14 +27,14 @@ const OrgPage = props => (
       <CardHeader>
         <BigHeader>Repositories</BigHeader>
         <div>
-          <Filter margin value="Filter" />
+          <Filter margin value="Filter" readOnly />
           <PrimaryButton>New repository</PrimaryButton>
         </div>
       </CardHeader>
-      {props.data && (
+      {data && (
         <RepoGridContainer>
           <SourceListHeader />
-          {props.data.repos.map(repo => (
+          {data.repos.map(repo => (
             <SourceListItem key={repo.id} {...repo} />
           ))}
         </RepoGridContainer>
@@ -44,13 +44,13 @@ const OrgPage = props => (
       <CardHeader underline>
         <BigHeader>Members</BigHeader>
         <div>
-          <Filter margin value="Filter" />
+          <Filter margin value="Filter" readOnly />
           <PrimaryButton>Add member</PrimaryButton>
         </div>
       </CardHeader>
-      {props.data && (
+      {data && (
         <MembersGridContainer>
-          {props.data.users.map(user => (
+          {data.users.map(user => (
             <MemberListItem key={user.id} {...user} />
           ))}
         </MembersGridContainer>

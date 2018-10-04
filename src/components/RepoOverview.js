@@ -85,7 +85,7 @@ const RepoOverview = ({ name, description, forks }) => (
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  forks: PropTypes.number.isRequired,
+  forks: PropTypes.string.isRequired,
 };
 
 const QuickInfoListContainer = styled.div`

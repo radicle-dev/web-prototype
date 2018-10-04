@@ -4,23 +4,23 @@ import PropTypes from 'prop-types';
 import { colors, elevation } from '../Utils';
 import { SmallLabel } from '../Elements';
 
-const MemberListItem = props => (
+const MemberListItem = ({ avatarUrl, firstName, lastName, username }) => (
   <ListItem>
-    <Avatar src={props.avatar_url} />
+    <Avatar src={avatarUrl} />
     <MetaData>
       <Name>
-        {props.first_name} {props.last_name}
+        {firstName} {lastName}
       </Name>
-      <Username>{props.username}</Username>
+      <Username>{username}</Username>
     </MetaData>
     <SmallLabel>Owner</SmallLabel>
   </ListItem>
 );
 
 MemberListItem.propTypes = {
-  avatar_url: PropTypes.string.isRequired,
-  first_name: PropTypes.string.isRequired,
-  last_name: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 };
 

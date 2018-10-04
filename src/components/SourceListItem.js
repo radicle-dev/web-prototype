@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { colors } from '../Utils';
 import { Icon } from '../Elements';
 
-const SourceListItem = props => {
-  const icon = type => {
+const SourceListItem = ({ name, id, type, description, lastUpdated }) => {
+  const icon = () => {
     switch (type) {
       case 'dir':
         return <Icon name="folder" />;
@@ -18,14 +18,14 @@ const SourceListItem = props => {
     }
   };
   return (
-    <ListItem to={`/repo/${props.name}`} id={props.id}>
+    <ListItem to={`/repo/${name}/overview`} id={id}>
       <Name>
-        {icon(props.type)}
-        <h3>{props.name}</h3>
+        {icon(type)}
+        <h3>{name}</h3>
       </Name>
-      <p>{props.description}</p>
+      <p>{description}</p>
       <Stats>
-        <Timestamp time={props.last_updated} />
+        <Timestamp time={lastUpdated} />
       </Stats>
     </ListItem>
   );
@@ -33,13 +33,14 @@ const SourceListItem = props => {
 
 SourceListItem.defaultProps = {
   type: 'source',
+  description: '',
 };
 
 SourceListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   id: PropTypes.number.isRequired,
-  last_updated: PropTypes.string.isRequired,
+  lastUpdated: PropTypes.string.isRequired,
   type: PropTypes.string,
 };
 

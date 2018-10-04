@@ -4,12 +4,17 @@ import styled from 'styled-components';
 import { colors } from '../Utils';
 import { Icon } from '.';
 
-const Select = props => (
+const Select = ({ children }) => (
   <SelectContainer>
-    <p>{props.children}</p>
+    <p>{children}</p>
     <Icon name="carrot" />
   </SelectContainer>
 );
+
+Select.propTypes = {
+  children: PropTypes.string.isRequired,
+};
+
 const SelectContainer = styled.div`
   display: flex;
   height: 36px;
@@ -29,9 +34,4 @@ const SelectContainer = styled.div`
     margin-right: 6px;
   }
 `;
-
-Select.propTypes = {
-  children: PropTypes.string.isRequired,
-};
-
 export default Select;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import AppHeader from '../Components/AppHeader';
 import SideBar from '../Components/SideBar';
 
-const Layout = props => (
+const Layout = ({ children }) => (
   <Wrapper>
     <HeaderContainer>
       <AppHeader />
@@ -12,7 +12,7 @@ const Layout = props => (
     <SideBarContainer>
       <SideBar />
     </SideBarContainer>
-    <ContentContainer>{props.children}</ContentContainer>
+    <ContentContainer>{children}</ContentContainer>
   </Wrapper>
 );
 

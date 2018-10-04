@@ -6,8 +6,8 @@ import SourceListHeader from './SourceListHeader';
 import SourceListItem from './SourceListItem';
 import RepoOverview from './RepoOverview';
 
-const RepoPage = props => {
-  const repo = props.data.repos.filter(repoItem => repoItem.name === props.match.params.repoId)[0];
+const RepoPage = ({ data, match }) => {
+  const repo = data.repos.filter(repoItem => repoItem.name === match.params.repoId)[0];
   return (
     <Layout>
       <RepoOverview {...repo} />

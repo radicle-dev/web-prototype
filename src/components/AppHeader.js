@@ -11,7 +11,7 @@ const ProjectPicker = () => (
         <Fragment>
           <ProjectPickerButton onClick={toggle}>
             <OrgIcon />
-            oscoin
+            <p>oscoin</p>
             <Icon name="carrot" />
           </ProjectPickerButton>
           {on && (
@@ -93,6 +93,9 @@ const ProjectPickerButton = styled.button`
   flex-direction: row;
   align-items: center;
   font-family: GTAmericaMedium;
+  > p {
+    padding-bottom: 4px;
+  }
 `;
 
 const OrgIcon = styled.div`
@@ -110,7 +113,7 @@ const TopBarMenuContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   > p {
-    padding-right: 24px;
+    padding: 0 24px 4px 0;
   }
 `;
 

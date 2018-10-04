@@ -6,8 +6,9 @@ export const SmallLabel = styled.p`
   font-size: 14px;
   border: 1px solid ${colors.green};
   border-radius: 2px;
-  padding: 4px 8px;
+  padding: 4px 8px 6px 8px;
   justify-self: end;
+  font-family: GTAmericaMedium;
 `;
 export const BigLabel = styled.p`
   ${({ pass }) =>

@@ -107,7 +107,7 @@ const SideBarItem = styled(NavLink)`
   align-items: center;
   color: ${colors.darkGrey};
   > p {
-    padding-left: 16px;
+    padding: 0 0 4px 16px;
   }
   &:hover {
     text-decoration: underline;

@@ -29,7 +29,7 @@ const SelectContainer = styled.div`
     margin-right: 16px;
   `};
   > p {
-    font-weight: bold;
+    font-family: GTAmericaBold;
     color: ${colors.darkGrey};
     margin-right: 6px;
   }

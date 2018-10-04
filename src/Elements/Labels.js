@@ -25,5 +25,5 @@ export const BigLabel = styled.p`
   padding: 10px 12px;
   justify-self: end;
   height: 36px;
-  font-weight: bold;
+  font-family: GTAmericaBold;
 `;

@@ -92,7 +92,7 @@ const ProjectPickerButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-weight: bold;
+  font-family: GTAmericaMedium;
 `;
 
 const OrgIcon = styled.div`

@@ -19,7 +19,7 @@ const ListHeader = styled.div`
   color: ${colors.darkGrey};
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: bold;
+  font-family: GTAmericaMedium;
   background-color: ${colors.almostWhite};
   border-top: 1px solid ${colors.lightGrey};
   border-bottom: 1px solid ${colors.lightGrey};

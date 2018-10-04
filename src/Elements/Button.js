@@ -5,8 +5,8 @@ import { colors } from '../Utils';
 export const PrimaryButton = styled.button`
   height: 36px;
   font-size: 16px;
-  padding: 0 16px;
-  font-weight: bold;
+  padding: 0 16px 4px 16px;
+  font-family: GTAmericaMedium;
   background-color: ${colors.purple};
   color: ${colors.white};
   border-radius: 4px;

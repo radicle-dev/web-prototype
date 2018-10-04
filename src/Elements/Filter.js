@@ -7,7 +7,7 @@ export default styled.input`
   border: 1px solid ${colors.lightGrey};
   border-radius: 4px;
   background-color: ${colors.almostWhite};
-  padding: 0 12px;
+  padding: 0 12px 4px 12px;
   color: ${colors.darkGrey};
   ${({ margin }) =>
     margin &&

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { colors } from '../Utils';
 import { Icon } from '../Elements';
 
-const SourceListItem = ({ name, id, type, description, lastUpdated }) => {
+const SourceListItem = ({ name, id, type, description, updatedAt }) => {
   const icon = () => {
     switch (type) {
       case 'dir':
@@ -25,7 +25,7 @@ const SourceListItem = ({ name, id, type, description, lastUpdated }) => {
       </Name>
       <p>{description}</p>
       <Stats>
-        <Timestamp time={lastUpdated} />
+        <Timestamp time={updatedAt} />
       </Stats>
     </ListItem>
   );
@@ -39,8 +39,8 @@ SourceListItem.defaultProps = {
 SourceListItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
-  id: PropTypes.number.isRequired,
-  lastUpdated: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string.isRequired,
   type: PropTypes.string,
 };
 
@@ -52,6 +52,10 @@ const ListItem = styled(Link)`
   color: ${colors.darkGrey};
   padding: 0 24px;
   align-items: center;
+  > div h3,
+  p {
+    padding-bottom: 5px;
+  }
   &:hover {
     background-color: ${colors.almostWhite};
     > div h3 {

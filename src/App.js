@@ -31,7 +31,7 @@ export default class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/" render={props => <OrgPage {...props} data={data} />} />
-              <Route exact path="/repo/:repoId" render={props => <RepoPage {...props} data={data} />} />
+              <Route exact path="/repo/:repoId/overview" render={props => <RepoPage {...props} data={data} />} />
               <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
               <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
               <Route component={NotFound} />
@@ -61,6 +61,7 @@ injectGlobal([
     color: inherit;
     text-decoration: none;
     vertical-align: baseline;
+    background-color: transparent;
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {

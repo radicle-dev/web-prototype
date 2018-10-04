@@ -5,27 +5,35 @@ import { Layout, FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButto
 import SourceListHeader from './SourceListHeader';
 import SourceListItem from './SourceListItem';
 import RepoOverview from './RepoOverview';
+import SideBar from './SideBar';
 
 const RepoPage = ({ data, match }) => {
   const repo = data.repos.filter(repoItem => repoItem.name === match.params.repoId)[0];
   return (
     <Layout>
-      <RepoOverview {...repo} />
-      <FloatingCard>
-        <CardHeader>
-          <Select>master</Select>
-          <div>
-            <SecondaryButton margin>Open in workspace</SecondaryButton>
-            <PrimaryButton>Clone</PrimaryButton>
-          </div>
-        </CardHeader>
-        <SourceBrowser>
-          <SourceListHeader />
-          {repo.content.map(file => (
-            <SourceListItem key={file.name} {...file} />
-          ))}
-        </SourceBrowser>
-      </FloatingCard>
+      <Wrapper>
+        <SideBarContainer>
+          <SideBar />
+        </SideBarContainer>
+        <ContentContainer>
+          <RepoOverview {...repo} />
+          <FloatingCard>
+            <CardHeader>
+              <Select>master</Select>
+              <div>
+                <SecondaryButton margin>Open in workspace</SecondaryButton>
+                <PrimaryButton>Clone</PrimaryButton>
+              </div>
+            </CardHeader>
+            <SourceBrowser>
+              <SourceListHeader />
+              {repo.content.map(file => (
+                <SourceListItem key={file.name} {...file} />
+              ))}
+            </SourceBrowser>
+          </FloatingCard>
+        </ContentContainer>
+      </Wrapper>
     </Layout>
   );
 };
@@ -34,6 +42,18 @@ RepoPage.propTypes = {
   match: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
+
+const SideBarContainer = styled.div`
+  grid-area: sd;
+`;
+const ContentContainer = styled.div`
+  grid-area: main;
+`;
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: 'sd main main main main main';
+`;
 
 const SourceBrowser = styled.div`
   display: grid;

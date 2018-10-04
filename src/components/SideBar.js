@@ -1,54 +1,93 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '../Utils';
 import { Icon } from '../Elements';
 
-const SideBar = () => (
+const SideBar = ({ org }) => (
   <SideBarContainer>
-    <li>
-      <SideBarItem>
-        <Icon name="overview" />
-        <p>Overview</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="source" />
-        <p>Source</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="commits" />
-        <p>Commits</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="branches" />
-        <p>Branches</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="issues" />
-        <p>Issues</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="revisions" />
-        <p>Revisions</p>
-      </SideBarItem>
-    </li>
-    <li>
-      <SideBarItem>
-        <Icon name="settings" />
-        <p>Settings</p>
-      </SideBarItem>
-    </li>
+    {org ? (
+      <Fragment>
+        <li>
+          <SideBarItem>
+            <Icon name="overview" />
+            <p>Overview</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="source" />
+            <p>Repositories</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="members" />
+            <p>Members</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="settings" />
+            <p>Settings</p>
+          </SideBarItem>
+        </li>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <li>
+          <SideBarItem>
+            <Icon name="overview" />
+            <p>Overview</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="source" />
+            <p>Source</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="commits" />
+            <p>Commits</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="branches" />
+            <p>Branches</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="issues" />
+            <p>Issues</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="revisions" />
+            <p>Revisions</p>
+          </SideBarItem>
+        </li>
+        <li>
+          <SideBarItem>
+            <Icon name="settings" />
+            <p>Settings</p>
+          </SideBarItem>
+        </li>
+      </Fragment>
+    )}
   </SideBarContainer>
 );
+
+SideBar.defaultProps = {
+  org: false,
+};
+SideBar.propTypes = {
+  org: PropTypes.bool,
+};
 
 const SideBarContainer = styled.ul`
   margin-top: 16px;

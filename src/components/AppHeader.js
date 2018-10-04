@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Toggle, colors, elevation } from '../Utils';
 import { Icon } from '../Elements';

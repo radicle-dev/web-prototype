@@ -1,89 +1,37 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import SourceListHeader from './SourceListHeader';
-import SourceListItem from './SourceListItem';
-import MemberListItem from './MemberListItem';
 import SideBar from './SideBar';
 import OrgOverview from './OrgOverview';
-import { Layout, BigHeader, FloatingCard, PrimaryButton, CardHeader, Filter } from '../Elements';
+import OrgSource from './OrgSource';
+import OrgMembers from './OrgMembers';
+import { Layout } from '../Elements';
 
-const OrgPage = ({ data }) => (
-  <Layout>
-    <Wrapper>
-      <SideBarContainer>
-        <SideBar org />
-      </SideBarContainer>
-      <ContentContainer>
-        <OrgOverview />
-        <FloatingCard>
-          <CardHeader>
-            <BigHeader>Repositories</BigHeader>
-            <div>
-              <Filter margin value="Filter" readOnly />
-              <PrimaryButton>New repository</PrimaryButton>
-            </div>
-          </CardHeader>
-          {data && (
-            <RepoGridContainer>
-              <SourceListHeader />
-              {data.repos.map(repo => (
-                <SourceListItem key={repo.id} {...repo} />
-              ))}
-            </RepoGridContainer>
-          )}
-        </FloatingCard>
-        <FloatingCard>
-          <CardHeader underline>
-            <BigHeader>Members</BigHeader>
-            <div>
-              <Filter margin value="Filter" readOnly />
-              <PrimaryButton>Add member</PrimaryButton>
-            </div>
-          </CardHeader>
-          {data && (
-            <MembersGridContainer>
-              {data.users.map(user => (
-                <MemberListItem key={user.id} {...user} />
-              ))}
-            </MembersGridContainer>
-          )}
-        </FloatingCard>
-      </ContentContainer>
-    </Wrapper>
-  </Layout>
-);
+const OrgPage = ({ data, selectedView }) => {
+  const sidebar = <SideBar org />;
+  const content = () => {
+    switch (selectedView) {
+      case 'overview':
+        return (
+          <Fragment>
+            <OrgOverview />
+            <OrgSource repos={data.repos} />
+            <OrgMembers members={data.users} />
+          </Fragment>
+        );
+      case 'repositories':
+        return <OrgSource repos={data.repos} />;
+      case 'members':
+        return <OrgMembers members={data.users} />;
+      default:
+        return null;
+    }
+  };
+  return <Layout sidebar={sidebar}>{data && content()}</Layout>;
+};
 
 OrgPage.propTypes = {
   data: PropTypes.object.isRequired,
+  selectedView: PropTypes.string.isRequired,
 };
-
-const SideBarContainer = styled.div`
-  grid-area: sd;
-`;
-const ContentContainer = styled.div`
-  grid-area: main;
-`;
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-areas: 'sd main main main main main';
-`;
-
-const RepoGridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 36px 48px;
-  margin: 0 auto;
-  max-width: 100%;
-  padding-bottom: 12px;
-`;
-const MembersGridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 0 auto;
-  max-width: 100%;
-  padding-bottom: 12px;
-`;
 
 export default OrgPage;

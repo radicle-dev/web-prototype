@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
 import { colors } from './Utils';
 import OrgPage from './Components/OrgPage';
@@ -30,8 +30,57 @@ export default class App extends Component {
         {data && (
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" render={props => <OrgPage {...props} data={data} />} />
-              <Route exact path="/repo/:repoId/overview" render={props => <RepoPage {...props} data={data} />} />
+              <Route exact path="/" render={() => <Redirect to="/overview" />} />
+              <Route
+                exact
+                path="/overview"
+                render={props => <OrgPage {...props} data={data} selectedView="overview" />}
+              />
+              <Route
+                exact
+                path="/repositories"
+                render={props => <OrgPage {...props} data={data} selectedView="repositories" />}
+              />
+              <Route
+                exact
+                path="/members"
+                render={props => <OrgPage {...props} data={data} selectedView="members" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/overview"
+                render={props => <RepoPage {...props} data={data} selectedView="overview" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/source"
+                render={props => <RepoPage {...props} data={data} selectedView="source" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/commits"
+                render={props => <RepoPage {...props} data={data} selectedView="commits" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/branches"
+                render={props => <RepoPage {...props} data={data} selectedView="branches" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/issues"
+                render={props => <RepoPage {...props} data={data} selectedView="issues" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/revisions"
+                render={props => <RepoPage {...props} data={data} selectedView="revisions" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/settings"
+                render={props => <RepoPage {...props} data={data} selectedView="settings" />}
+              />
               <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
               <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
               <Route component={NotFound} />

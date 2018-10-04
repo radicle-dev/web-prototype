@@ -1,67 +1,44 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Layout, FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButton } from '../Elements';
-import SourceListHeader from './SourceListHeader';
-import SourceListItem from './SourceListItem';
+import { Layout } from '../Elements';
 import RepoOverview from './RepoOverview';
+import RepoSource from './RepoSource';
 import SideBar from './SideBar';
 
-const RepoPage = ({ data, match }) => {
+const RepoPage = ({ data, match, selectedView }) => {
   const repo = data.repos.filter(repoItem => repoItem.name === match.params.repoId)[0];
-  return (
-    <Layout>
-      <Wrapper>
-        <SideBarContainer>
-          <SideBar />
-        </SideBarContainer>
-        <ContentContainer>
-          <RepoOverview {...repo} />
-          <FloatingCard>
-            <CardHeader>
-              <Select>master</Select>
-              <div>
-                <SecondaryButton margin>Open in workspace</SecondaryButton>
-                <PrimaryButton>Clone</PrimaryButton>
-              </div>
-            </CardHeader>
-            <SourceBrowser>
-              <SourceListHeader />
-              {repo.content.map(file => (
-                <SourceListItem key={file.name} {...file} />
-              ))}
-            </SourceBrowser>
-          </FloatingCard>
-        </ContentContainer>
-      </Wrapper>
-    </Layout>
-  );
+  const sidebar = <SideBar repoId={repo.name} />;
+  const content = () => {
+    switch (selectedView) {
+      case 'overview':
+        return (
+          <Fragment>
+            <RepoOverview {...repo} />
+            <RepoSource {...repo} />
+          </Fragment>
+        );
+      case 'source':
+        return <RepoSource {...repo} />;
+      case 'commits':
+        return <h1>commits</h1>;
+      case 'branches':
+        return <h1>branches</h1>;
+      case 'issues':
+        return <h1>issues</h1>;
+      case 'revisions':
+        return <h1>revisions</h1>;
+      case 'settings':
+        return <h1>settings</h1>;
+      default:
+        return null;
+    }
+  };
+  return <Layout sidebar={sidebar}>{content()}</Layout>;
 };
 
 RepoPage.propTypes = {
   match: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
-
-const SideBarContainer = styled.div`
-  grid-area: sd;
-`;
-const ContentContainer = styled.div`
-  grid-area: main;
-`;
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-areas: 'sd main main main main main';
-`;
-
-const SourceBrowser = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 36px 48px;
-  margin: 0 auto;
-  max-width: 100%;
-  padding-bottom: 12px;
-`;
 
 export default RepoPage;

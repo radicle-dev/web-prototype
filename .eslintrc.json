@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["react-app", "airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8,

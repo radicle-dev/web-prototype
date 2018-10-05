@@ -14,7 +14,7 @@ const Layout = ({ children, sidebar }) => (
 );
 
 Layout.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.object.isRequired,
   sidebar: PropTypes.object.isRequired,
 };
 

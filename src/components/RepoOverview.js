@@ -82,9 +82,12 @@ const RepoOverview = ({ name, description }) => (
   </FloatingCard>
 );
 
+RepoOverview.defaultProps = {
+  description: '',
+};
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
 };
 
 const QuickInfoListContainer = styled.div`

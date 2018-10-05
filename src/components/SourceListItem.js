@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { colors } from '../Utils';
 import { Icon } from '../Elements';
 
-const SourceListItem = ({ name, id, type, description, updatedAt }) => {
+const SourceListItem = ({ name, oid, type, description, updatedAt, repo }) => {
   const icon = () => {
     switch (type) {
       case 'tree':
@@ -17,7 +17,7 @@ const SourceListItem = ({ name, id, type, description, updatedAt }) => {
     }
   };
   return (
-    <ListItem to={`/repo/${name}/tree/`} id={id}>
+    <ListItem to={`/repo/${repo}/tree/${name}`} id={oid}>
       <Name>
         {icon(type)}
         <h3>{name}</h3>
@@ -31,16 +31,18 @@ const SourceListItem = ({ name, id, type, description, updatedAt }) => {
 };
 
 SourceListItem.defaultProps = {
-  type: 'source',
+  type: 'blob',
   description: '',
+  updatedAt: '',
 };
 
 SourceListItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  updatedAt: PropTypes.string.isRequired,
+  oid: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string,
   type: PropTypes.string,
+  repo: PropTypes.string.isRequired,
 };
 
 const ListItem = styled(Link)`

@@ -22,7 +22,7 @@ const RepoSource = ({ repo }) => (
             .sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase())
             .sort((a, b) => a.type.toLowerCase() < b.type.toLowerCase())
             .map(file => (
-              <SourceListItem key={file.name} {...file} />
+              <SourceListItem key={file.name} {...file} repo={repo.name} />
             ))}
         </SourceBrowser>
       </FloatingCard>

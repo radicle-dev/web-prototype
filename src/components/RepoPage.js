@@ -5,6 +5,7 @@ import GithubClient from '../github-graphql';
 import { Layout } from '../Elements';
 import RepoOverview from './RepoOverview';
 import RepoSource from './RepoSource';
+import RepoCommits from './RepoCommits';
 import SideBar from './SideBar';
 
 export default class RepoPage extends Component {
@@ -14,43 +15,64 @@ export default class RepoPage extends Component {
 
   componentDidMount() {
     this.fetchRepo();
-    // this.fetchMembers();
   }
 
   fetchRepo = async () => {
+    const { match } = this.props;
     const response = await GithubClient.query({
       query: gql`
         query {
-          repository(owner: "oscoin", name: ${this.props.match.params.repoId}) {
-            name
-            description
-            object(expression: "master:") {
-              ... on Tree{
-                entries{
-                  name
-                  type
-                }
-              }
-            }
-            issues(last:3, states:OPEN) {
-              edges {
-                node {
-                  title
-                  url
-                  labels(first:5) {
+          repository(owner: "oscoin", name: ${match.params.repoId}) {
+            ref(qualifiedName: "master") {
+              target {
+                ... on Commit {
+                  history(first: 20) {
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
                     edges {
                       node {
-                        name
+                        oid
+                        pushedDate
+                        messageHeadline
+                        author {
+                          name
+                          avatarUrl
+                        }
                       }
                     }
                   }
                 }
               }
             }
+            name
+            description
+            object(expression: "master:") {
+              ... on Tree {
+                entries {
+                  name
+                  type
+                  oid
+                }
+              }
+            }
+            issues(last:20, states:OPEN) {
+              edges {
+                node {
+                  author {
+                    login
+                  }
+                  title
+                  bodyText
+                  id
+                  number
+                  publishedAt
+                }
+              }
+            }
           }
         }
-
-
       `,
     });
 
@@ -62,8 +84,9 @@ export default class RepoPage extends Component {
 
   render() {
     const { repo } = this.state;
+    const { selectedView } = this.props;
     const content = () => {
-      switch (this.props.selectedView) {
+      switch (selectedView) {
         case 'overview':
           return (
             <Fragment>
@@ -74,7 +97,7 @@ export default class RepoPage extends Component {
         case 'source':
           return <RepoSource repo={repo} />;
         case 'commits':
-          return <h1>commits</h1>;
+          return <RepoCommits commits={repo.ref.target.history.edges} />;
         case 'branches':
           return <h1>branches</h1>;
         case 'issues':

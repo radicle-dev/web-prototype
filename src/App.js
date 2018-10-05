@@ -15,8 +15,6 @@ import MediumItalic from './fonts/GTAmericaMediumItalic.otf';
 import Bold from './fonts/GTAmericaBold.otf';
 import Mono from './fonts/GTAmericaMonoRegular.otf';
 
-const url = 'http://localhost:5678/';
-
 export default class App extends Component {
   state = {
     data: null,
@@ -24,7 +22,6 @@ export default class App extends Component {
 
   componentDidMount() {
     this.fetchRepos();
-    // this.fetchMembers();
   }
 
   fetchRepos = async () => {
@@ -60,14 +57,8 @@ export default class App extends Component {
     this.setState({
       data: response.data.organization,
     });
-    console.log(response.data.organization);
+    // console.log(response.data.organization);
   };
-
-  async fetchMembers() {
-    await (await fetch(url)).json().then(data => {
-      this.setState({ data });
-    });
-  }
 
   render() {
     const { data } = this.state;

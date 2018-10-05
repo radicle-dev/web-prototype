@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BigHeader, FloatingCard, CardHeader, Filter, PrimaryButton } from '../Elements';
 
-import SourceListHeader from './SourceListHeader';
-import SourceListItem from './SourceListItem';
+import RepoListHeader from './RepoListHeader';
+import RepoListItem from './RepoListItem';
 
 const OrgSource = ({ repos }) => (
   <FloatingCard>
@@ -17,9 +17,9 @@ const OrgSource = ({ repos }) => (
     </CardHeader>
     {repos && (
       <RepoGridContainer>
-        <SourceListHeader />
+        <RepoListHeader />
         {repos.map(repo => (
-          <SourceListItem key={repo.id} {...repo} />
+          <RepoListItem key={repo.id} {...repo} />
         ))}
       </RepoGridContainer>
     )}

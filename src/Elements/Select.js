@@ -29,9 +29,10 @@ const SelectContainer = styled.div`
     margin-right: 16px;
   `};
   > p {
-    font-family: GTAmericaBold;
+    font-family: GTAmericaMedium;
     color: ${colors.darkGrey};
     margin-right: 6px;
+    padding-bottom: 4px;
   }
 `;
 export default Select;

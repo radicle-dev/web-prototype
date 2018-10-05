@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { colors } from '../Utils';
 import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../Elements';
 
-const RepoOverview = ({ name, description, forks }) => (
+const RepoOverview = ({ name, description }) => (
   <FloatingCard>
     <CardHeader>
       <BigHeader>{name}</BigHeader>
       <div>
         <SecondaryButton margin>Favourite</SecondaryButton>
         <SecondaryButton margin>Support</SecondaryButton>
-        <SecondaryButton>Fork ({forks})</SecondaryButton>
+        <SecondaryButton>Fork</SecondaryButton>
       </div>
     </CardHeader>
     <RepoDesc>{description}</RepoDesc>
@@ -85,7 +85,6 @@ const RepoOverview = ({ name, description, forks }) => (
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  forks: PropTypes.string.isRequired,
 };
 
 const QuickInfoListContainer = styled.div`

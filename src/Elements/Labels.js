@@ -23,8 +23,8 @@ export const BigLabel = styled.p`
     `};
 
   border-radius: 4px;
-  padding: 10px 12px;
+  padding: 7px 12px 4px 12px;
   justify-self: end;
   height: 36px;
-  font-family: GTAmericaBold;
+  font-family: GTAmericaMedium;
 `;

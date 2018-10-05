@@ -6,18 +6,19 @@ import PropTypes from 'prop-types';
 import { colors } from '../Utils';
 import { Icon } from '../Elements';
 
-const SourceListItem = ({ name, id, type, description, updatedAt }) => {
+const RepoListItem = ({ name, id, type, description, updatedAt }) => {
   const icon = () => {
     switch (type) {
-      case 'tree':
+      case 'dir':
         return <Icon name="folder" />;
-      case 'blob':
+      case 'file':
         return <Icon name="file" />;
       default:
+        return <Icon name="source" />;
     }
   };
   return (
-    <ListItem to={`/repo/${name}/tree/`} id={id}>
+    <ListItem to={`/repo/${name}/overview`} id={id}>
       <Name>
         {icon(type)}
         <h3>{name}</h3>
@@ -30,12 +31,12 @@ const SourceListItem = ({ name, id, type, description, updatedAt }) => {
   );
 };
 
-SourceListItem.defaultProps = {
+RepoListItem.defaultProps = {
   type: 'source',
   description: '',
 };
 
-SourceListItem.propTypes = {
+RepoListItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   id: PropTypes.string.isRequired,
@@ -76,4 +77,4 @@ const Name = styled.div`
 const Stats = styled.p`
   text-align: right;
 `;
-export default SourceListItem;
+export default RepoListItem;

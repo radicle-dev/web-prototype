@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../Utils';
 
-const SourceListHeader = () => (
+const RepoListHeader = () => (
   <ListHeader>
     <h3>name</h3>
     <p>description</p>
@@ -30,4 +30,4 @@ const ListHeader = styled.div`
   }
 `;
 
-export default SourceListHeader;
+export default RepoListHeader;

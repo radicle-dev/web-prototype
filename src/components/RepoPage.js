@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import GithubClient from '../github-graphql';
-import { Layout } from '../Elements';
+import { Layout } from '../elements';
 import RepoOverview from './RepoOverview';
 import RepoSource from './RepoSource';
 import RepoCommits from './RepoCommits';

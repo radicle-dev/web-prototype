@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import OrgOverview from './OrgOverview';
 import OrgSource from './OrgSource';
 import OrgMembers from './OrgMembers';
-import { Layout } from '../Elements';
+import { Layout } from '../elements';
 
 const OrgPage = ({ data, selectedView }) => {
   const sidebar = <SideBar org />;

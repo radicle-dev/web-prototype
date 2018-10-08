@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors } from '../Utils';
-import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../Elements';
+import { colors } from '../utils';
+import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../elements';
 
 const RepoOverview = ({ name, description }) => (
   <FloatingCard>

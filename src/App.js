@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
 import gql from 'graphql-tag';
 import GithubClient from './github-graphql';
-import { colors } from './Utils';
-import OrgPage from './Components/OrgPage';
-import RepoPage from './Components/RepoPage';
-import NotFound from './Components/NotFound';
+import { colors } from './utils';
+import OrgPage from './components/OrgPage';
+import RepoPage from './components/RepoPage';
+import NotFound from './components/NotFound';
 
 import Regular from './fonts/GTAmericaRegular.otf';
 import RegularItalic from './fonts/GTAmericaRegularItalic.otf';

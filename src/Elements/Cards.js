@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, elevation } from '../Utils';
+import { colors, elevation } from '../utils';
 
 export const FloatingCard = styled.div`
   background-color: white;

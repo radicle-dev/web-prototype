@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { colors } from '../Utils';
-import { Icon } from '../Elements';
+import { colors } from '../utils';
+import { Icon } from '../elements';
 
 const SideBar = ({ org, repoId }) => (
   <SideBarContainer>

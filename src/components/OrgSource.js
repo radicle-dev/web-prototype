@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BigHeader, FloatingCard, CardHeader, Filter, PrimaryButton } from '../Elements';
+import { BigHeader, FloatingCard, CardHeader, Filter, PrimaryButton } from '../elements';
 
 import RepoListHeader from './RepoListHeader';
 import RepoListItem from './RepoListItem';

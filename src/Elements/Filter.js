@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../Utils';
+import { colors } from '../utils';
 
 export default styled.input`
   height: 36px;

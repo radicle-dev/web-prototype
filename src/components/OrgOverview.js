@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BigHeader, FloatingCard } from '../Elements';
-import { elevation, colors } from '../Utils';
+import { BigHeader, FloatingCard } from '../elements';
+import { elevation, colors } from '../utils';
 
 const OrgOverview = ({ orgName, orgDesc, orgIcon }) => (
   <FloatingCard>
@@ -14,6 +15,12 @@ const OrgOverview = ({ orgName, orgDesc, orgIcon }) => (
     </OverviewContainer>
   </FloatingCard>
 );
+
+OrgOverview.propTypes = {
+  orgName: PropTypes.string.isRequired,
+  orgDesc: PropTypes.string.isRequired,
+  orgIcon: PropTypes.string.isRequired,
+};
 
 const OverviewContainer = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButton } from '../Elements';
+import { FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButton } from '../elements';
 import SourceListHeader from './SourceListHeader';
 import SourceListItem from './SourceListItem';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Portal, absolute, colors } from '../Utils';
+import { Portal, absolute, colors } from '../utils';
 import Icon from './Icon';
 import { FloatingCard } from './Cards';
 

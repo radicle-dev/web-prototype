@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Timestamp from 'react-timestamp';
 import styled from 'styled-components';
-import { colors } from '../Utils';
+import { colors } from '../utils';
 
 const CommitListItem = ({ date, message, author, hash }) => (
   <ListItem>

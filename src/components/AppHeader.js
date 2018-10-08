@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { Toggle, colors, elevation } from '../Utils';
-import { Icon } from '../Elements';
+import { Toggle, colors, elevation } from '../utils';
+import { Icon } from '../elements';
 
 const ProjectPicker = () => (
   <ProjectPickerContainer>

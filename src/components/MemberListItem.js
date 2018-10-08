@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, elevation } from '../Utils';
-import { SmallLabel } from '../Elements';
+import { colors, elevation } from '../utils';
+import { SmallLabel } from '../elements';
 
 const MemberListItem = ({ avatarUrl, name, login }) => (
   <ListItem>

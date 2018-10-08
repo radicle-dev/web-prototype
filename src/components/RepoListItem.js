@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors } from '../Utils';
-import { Icon } from '../Elements';
+import { colors } from '../utils';
+import { Icon } from '../elements';
 
 const RepoListItem = ({ name, id, type, description, updatedAt }) => {
   const icon = () => {

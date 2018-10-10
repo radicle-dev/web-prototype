@@ -114,7 +114,7 @@ const QuickIssue = styled.div`
   padding: 16px;
 `;
 const IssueTitle = styled.h3`
-  font-family: GTAmericaBold;
+  font-family: GTAmericaMedium;
   margin: 4px 0 6px 0;
   max-width: 460px;
   white-space: nowrap;

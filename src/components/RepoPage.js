@@ -7,6 +7,7 @@ import RepoOverview from './RepoOverview';
 import RepoSource from './RepoSource';
 import RepoCommits from './RepoCommits';
 import RepoBranches from './RepoBranches';
+import RepoIssues from './RepoIssues';
 import SideBar from './SideBar';
 
 export default class RepoPage extends Component {
@@ -81,6 +82,14 @@ export default class RepoPage extends Component {
                   author {
                     login
                   }
+                  assignees(first: 1) {
+                    edges {
+                      node {
+                        avatarUrl(size: 24)
+                      }
+                    }
+                  }
+                  closed
                   title
                   bodyText
                   id
@@ -119,7 +128,7 @@ export default class RepoPage extends Component {
         case 'branches':
           return <RepoBranches branches={repo.refs.edges} />;
         case 'issues':
-          return <h1>issues</h1>;
+          return <RepoIssues issues={repo.issues.edges} />;
         case 'revisions':
           return <h1>revisions</h1>;
         case 'settings':

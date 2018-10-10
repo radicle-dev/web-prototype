@@ -1,67 +1,138 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Layout, FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButton } from '../Elements';
-import SourceListHeader from './SourceListHeader';
-import SourceListItem from './SourceListItem';
+import gql from 'graphql-tag';
+import GithubClient from '../github-graphql';
+import { Layout } from '../elements';
 import RepoOverview from './RepoOverview';
+import RepoSource from './RepoSource';
+import RepoCommits from './RepoCommits';
+import RepoBranches from './RepoBranches';
 import SideBar from './SideBar';
 
-const RepoPage = ({ data, match }) => {
-  const repo = data.repos.filter(repoItem => repoItem.name === match.params.repoId)[0];
-  return (
-    <Layout>
-      <Wrapper>
-        <SideBarContainer>
-          <SideBar />
-        </SideBarContainer>
-        <ContentContainer>
-          <RepoOverview {...repo} />
-          <FloatingCard>
-            <CardHeader>
-              <Select>master</Select>
-              <div>
-                <SecondaryButton margin>Open in workspace</SecondaryButton>
-                <PrimaryButton>Clone</PrimaryButton>
-              </div>
-            </CardHeader>
-            <SourceBrowser>
-              <SourceListHeader />
-              {repo.content.map(file => (
-                <SourceListItem key={file.name} {...file} />
-              ))}
-            </SourceBrowser>
-          </FloatingCard>
-        </ContentContainer>
-      </Wrapper>
-    </Layout>
-  );
-};
+export default class RepoPage extends Component {
+  state = {
+    repo: null,
+  };
+
+  componentDidMount() {
+    this.fetchRepo();
+  }
+
+  fetchRepo = async () => {
+    const { match } = this.props;
+    const response = await GithubClient.query({
+      query: gql`
+        query {
+          repository(owner: "oscoin", name: ${match.params.repoId}) {
+            ref(qualifiedName: "master") {
+              target {
+                ... on Commit {
+                  history(first: 20) {
+                    edges {
+                      node {
+                        oid
+                        pushedDate
+                        messageHeadline
+                        author {
+                          name
+                          avatarUrl
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            refs(first: 20, refPrefix:"refs/heads/") {
+              edges {
+                node {
+                  associatedPullRequests(last:1) {
+                    nodes {
+                      additions
+                      deletions
+                      state
+                    }
+                  }
+                  name
+                  target {
+                    ... on Commit {
+                      abbreviatedOid
+                      message
+                      committedDate
+                    }
+                  }
+                }
+              }
+            }
+            name
+            description
+            object(expression: "master:") {
+              ... on Tree {
+                entries {
+                  name
+                  type
+                  oid
+                }
+              }
+            }
+            issues(last:20, states:OPEN) {
+              edges {
+                node {
+                  author {
+                    login
+                  }
+                  title
+                  bodyText
+                  id
+                  number
+                  publishedAt
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    this.setState({
+      repo: response.data.repository,
+    });
+    console.log(response.data.repository);
+  };
+
+  render() {
+    const { repo } = this.state;
+    const { selectedView } = this.props;
+    const content = () => {
+      switch (selectedView) {
+        case 'overview':
+          return (
+            <Fragment>
+              <RepoOverview {...repo} />
+              <RepoSource repo={repo} />
+            </Fragment>
+          );
+        case 'source':
+          return <RepoSource repo={repo} />;
+        case 'commits':
+          return <RepoCommits commits={repo.ref.target.history.edges} />;
+        case 'branches':
+          return <RepoBranches branches={repo.refs.edges} />;
+        case 'issues':
+          return <h1>issues</h1>;
+        case 'revisions':
+          return <h1>revisions</h1>;
+        case 'settings':
+          return <h1>settings</h1>;
+        default:
+          return null;
+      }
+    };
+    return <Fragment>{repo && <Layout sidebar={<SideBar repoId={repo.name} />}>{content()}</Layout>}</Fragment>;
+  }
+}
 
 RepoPage.propTypes = {
   match: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
-
-const SideBarContainer = styled.div`
-  grid-area: sd;
-`;
-const ContentContainer = styled.div`
-  grid-area: main;
-`;
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-areas: 'sd main main main main main';
-`;
-
-const SourceBrowser = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 36px 48px;
-  margin: 0 auto;
-  max-width: 100%;
-  padding-bottom: 12px;
-`;
-
-export default RepoPage;

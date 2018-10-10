@@ -1,12 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
-import { colors } from './Utils';
-import OrgPage from './Components/OrgPage';
-import RepoPage from './Components/RepoPage';
-import NotFound from './Components/NotFound';
+import gql from 'graphql-tag';
+import GithubClient from './github-graphql';
+import { colors } from './utils';
+import OrgPage from './components/OrgPage';
+import RepoPage from './components/RepoPage';
+import NotFound from './components/NotFound';
 
-const url = 'http://localhost:5678/';
+import Regular from './fonts/GTAmericaRegular.otf';
+import RegularItalic from './fonts/GTAmericaRegularItalic.otf';
+import Medium from './fonts/GTAmericaMedium.otf';
+import MediumItalic from './fonts/GTAmericaMediumItalic.otf';
+import Bold from './fonts/GTAmericaBold.otf';
+import Mono from './fonts/GTAmericaMonoRegular.otf';
 
 export default class App extends Component {
   state = {
@@ -17,11 +24,41 @@ export default class App extends Component {
     this.fetchRepos();
   }
 
-  async fetchRepos() {
-    await (await fetch(url)).json().then(data => {
-      this.setState({ data });
+  fetchRepos = async () => {
+    const response = await GithubClient.query({
+      query: gql`
+        query {
+          organization(login: "oscoin") {
+            id
+            name
+            description
+            avatarUrl
+            repositories(first: 100) {
+              nodes {
+                id
+                name
+                description
+                updatedAt
+              }
+            }
+            members(first: 30) {
+              nodes {
+                id
+                name
+                login
+                avatarUrl
+              }
+            }
+          }
+        }
+      `,
     });
-  }
+
+    this.setState({
+      data: response.data.organization,
+    });
+    // console.log(response.data.organization);
+  };
 
   render() {
     const { data } = this.state;
@@ -30,8 +67,57 @@ export default class App extends Component {
         {data && (
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" render={props => <OrgPage {...props} data={data} />} />
-              <Route exact path="/repo/:repoId/overview" render={props => <RepoPage {...props} data={data} />} />
+              <Route exact path="/" render={() => <Redirect to="/overview" />} />
+              <Route
+                exact
+                path="/overview"
+                render={props => <OrgPage {...props} data={data} selectedView="overview" />}
+              />
+              <Route
+                exact
+                path="/repositories"
+                render={props => <OrgPage {...props} data={data} selectedView="repositories" />}
+              />
+              <Route
+                exact
+                path="/members"
+                render={props => <OrgPage {...props} data={data} selectedView="members" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/overview"
+                render={props => <RepoPage {...props} data={data} selectedView="overview" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/source"
+                render={props => <RepoPage {...props} data={data} selectedView="source" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/commits"
+                render={props => <RepoPage {...props} data={data} selectedView="commits" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/branches"
+                render={props => <RepoPage {...props} data={data} selectedView="branches" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/issues"
+                render={props => <RepoPage {...props} data={data} selectedView="issues" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/revisions"
+                render={props => <RepoPage {...props} data={data} selectedView="revisions" />}
+              />
+              <Route
+                exact
+                path="/repo/:repoId/settings"
+                render={props => <RepoPage {...props} data={data} selectedView="settings" />}
+              />
               <Route exact path="/juliendonck" render={() => <h1>juliendonck</h1>} />
               <Route exact path="/daimler" render={() => <h1>daimler</h1>} />
               <Route component={NotFound} />
@@ -89,34 +175,36 @@ injectGlobal([
 
   @font-face {
     font-family: GTAmerica;
-    src: url("./Utils/fonts/GT America Regular.otf") format("opentype");
+    src: url(${Regular}) format("opentype");
   }
 
   @font-face {
     font-family: GTAmerica;
     font-style: italic;
-    src: url("./Utils/fonts/GT America Regular Italic.otf") format("opentype");
+    src: url(${RegularItalic}) format("opentype");
   }
 
   @font-face {
-    font-family: GTAmerica;
-    font-weight: bold;
-    src: url("./Utils/fonts/GT America Medium.otf") format("opentype");
+    font-family: GTAmericaMedium;
+    src: url(${Medium}) format("opentype");
   }
   @font-face {
-    font-family: GTAmerica;
-    font-weight: bold;
+    font-family: GTAmericaMedium;
     font-style: italic;
-    src: url("./Utils/fonts/GT America Medium Italic.otf") format("opentype");
+    src: url(${MediumItalic}) format("opentype");
+  }
+  @font-face {
+    font-family: GTAmericaBold;
+    src: url(${Bold}) format("opentype");
   }
 
   @font-face {
     font-family: GTAmericaMono;
-    src: url("./Utils/fonts/GT America Mono Regular.otf") format("opentype");
+    src: url(${Mono}) format("opentype");
   }
 
   body {
-    font-family: GTAmerica, Arial, Helvetica, sans-serif;
+    font-family: GTAmerica, Helvetica, Arial, sans-serif;
     font-size: 16px;
     color: ${colors.black};
     background-color: #f2f2f2;

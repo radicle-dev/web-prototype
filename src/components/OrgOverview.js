@@ -1,26 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BigHeader, FloatingCard, CardHeader } from '../Elements';
-import { elevation, colors } from '../Utils';
+import { BigHeader, FloatingCard } from '../elements';
+import { elevation, colors } from '../utils';
 
-const OrgOverview = () => (
+const OrgOverview = ({ orgName, orgDesc, orgIcon }) => (
   <FloatingCard>
-    <CardHeader>
-      <OrgLogo />
+    <OverviewContainer>
+      <OrgLogo src={orgIcon} />
       <div>
-        <BigHeader>oscoin</BigHeader>
-        <OrgDesc>
-          In hac habitasse platea dictumst. Suspendisse potenti. Vestibulum sollicitudin blandit mi, eget tincidunt diam
-          maximus vel. Pellentesque luctus mauris rhoncus, aliquam nunc molestie, consectetur eros. In hac habitasse
-          platea dictumst. Suspendisse potenti. Vestibulum sollicitudin blandit mi, eget tincidunt diam maximus vel.
-          Pellentesque luctus mauris rhoncus, aliquam nunc molestie, consectetur eros.
-        </OrgDesc>
+        <BigHeader>{orgName}</BigHeader>
+        <OrgDesc>{orgDesc}</OrgDesc>
       </div>
-    </CardHeader>
+    </OverviewContainer>
   </FloatingCard>
 );
 
-const OrgLogo = styled.div`
+OrgOverview.propTypes = {
+  orgName: PropTypes.string.isRequired,
+  orgDesc: PropTypes.string.isRequired,
+  orgIcon: PropTypes.string.isRequired,
+};
+
+const OverviewContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 24px;
+`;
+const OrgLogo = styled.img`
   min-height: 72px;
   min-width: 72px;
   max-height: 72px;

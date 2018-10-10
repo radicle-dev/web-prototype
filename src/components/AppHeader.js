@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Toggle, colors, elevation } from '../Utils';
-import { Icon } from '../Elements';
+import { Toggle, colors, elevation } from '../utils';
+import { Icon } from '../elements';
 
 const ProjectPicker = () => (
   <ProjectPickerContainer>
@@ -12,7 +11,7 @@ const ProjectPicker = () => (
         <Fragment>
           <ProjectPickerButton onClick={toggle}>
             <OrgIcon />
-            oscoin
+            <p>oscoin</p>
             <Icon name="carrot" />
           </ProjectPickerButton>
           {on && (
@@ -93,7 +92,10 @@ const ProjectPickerButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-weight: bold;
+  font-family: GTAmericaMedium;
+  > p {
+    padding-bottom: 4px;
+  }
 `;
 
 const OrgIcon = styled.div`
@@ -111,7 +113,7 @@ const TopBarMenuContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   > p {
-    padding-right: 24px;
+    padding: 0 24px 4px 0;
   }
 `;
 

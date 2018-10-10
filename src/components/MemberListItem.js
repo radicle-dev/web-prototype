@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, elevation } from '../Utils';
-import { SmallLabel } from '../Elements';
+import { colors, elevation } from '../utils';
+import { SmallLabel } from '../elements';
 
-const MemberListItem = ({ avatarUrl, firstName, lastName, username }) => (
+const MemberListItem = ({ avatarUrl, name, login }) => (
   <ListItem>
     <Avatar src={avatarUrl} />
     <MetaData>
-      <Name>
-        {firstName} {lastName}
-      </Name>
-      <Username>{username}</Username>
+      <Name>{name}</Name>
+      <Username>{login}</Username>
     </MetaData>
     <SmallLabel>Owner</SmallLabel>
   </ListItem>
@@ -19,9 +17,8 @@ const MemberListItem = ({ avatarUrl, firstName, lastName, username }) => (
 
 MemberListItem.propTypes = {
   avatarUrl: PropTypes.string.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  login: PropTypes.string.isRequired,
 };
 
 const ListItem = styled.div`
@@ -48,12 +45,12 @@ const MetaData = styled.div`
 `;
 const Name = styled.h4`
   line-height: 125%;
-  font-weight: bold;
+  font-family: GTAmericaMedium;
   color: ${colors.black};
 `;
 const Username = styled(Name)`
   color: ${colors.darkGrey};
-  font-weight: normal;
+  font-family: GTAmerica;
 `;
 
 export default MemberListItem;

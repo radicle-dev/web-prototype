@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors } from '../Utils';
+import { colors } from '../utils';
 import { Icon } from '.';
 
 const Select = ({ children }) => (
@@ -29,9 +29,10 @@ const SelectContainer = styled.div`
     margin-right: 16px;
   `};
   > p {
-    font-weight: bold;
+    font-family: GTAmericaMedium;
     color: ${colors.darkGrey};
     margin-right: 6px;
+    padding-bottom: 4px;
   }
 `;
 export default Select;

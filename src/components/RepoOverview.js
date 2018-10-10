@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors } from '../Utils';
-import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../Elements';
+import { colors } from '../utils';
+import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../elements';
 
-const RepoOverview = ({ name, description, forks }) => (
+const RepoOverview = ({ name, description }) => (
   <FloatingCard>
     <CardHeader>
       <BigHeader>{name}</BigHeader>
       <div>
         <SecondaryButton margin>Favourite</SecondaryButton>
         <SecondaryButton margin>Support</SecondaryButton>
-        <SecondaryButton>Fork ({forks})</SecondaryButton>
+        <SecondaryButton>Fork</SecondaryButton>
       </div>
     </CardHeader>
     <RepoDesc>{description}</RepoDesc>
@@ -82,10 +82,12 @@ const RepoOverview = ({ name, description, forks }) => (
   </FloatingCard>
 );
 
+RepoOverview.defaultProps = {
+  description: '',
+};
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  forks: PropTypes.string.isRequired,
+  description: PropTypes.string,
 };
 
 const QuickInfoListContainer = styled.div`
@@ -112,7 +114,7 @@ const QuickIssue = styled.div`
   padding: 16px;
 `;
 const IssueTitle = styled.h3`
-  font-weight: bold;
+  font-family: GTAmericaMedium;
   margin: 4px 0 6px 0;
   max-width: 460px;
   white-space: nowrap;
@@ -136,7 +138,7 @@ const QuickRevision = styled.div`
   padding: 16px;
 `;
 const RevisionTitle = styled.h3`
-  font-weight: bold;
+  font-family: GTAmericaMedium;
   margin: 4px 0 6px 0;
   max-width: 300px;
   white-space: nowrap;
@@ -153,7 +155,7 @@ const RevisionDesc = styled.p`
   height: 22px;
 `;
 const LoadMore = styled.div`
-  font-weight: bold;
+  font-family: GTAmericaMedium;
   display: flex;
   background-color: ${colors.almostWhite};
   color: ${colors.darkGrey};

@@ -11,7 +11,7 @@ const RepoBranches = ({ branches }) => (
       <Fragment>
         <FloatingCard>
           <CardHeader>
-            <Picker>master</Picker>
+            <Picker items={['Overview', 'Active', 'Stale', 'All branches']}>master</Picker>
             <PrimaryButton>New branch</PrimaryButton>
           </CardHeader>
         </FloatingCard>

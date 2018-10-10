@@ -6,6 +6,7 @@ import { Layout } from '../elements';
 import RepoOverview from './RepoOverview';
 import RepoSource from './RepoSource';
 import RepoCommits from './RepoCommits';
+import RepoBranches from './RepoBranches';
 import SideBar from './SideBar';
 
 export default class RepoPage extends Component {
@@ -27,10 +28,6 @@ export default class RepoPage extends Component {
               target {
                 ... on Commit {
                   history(first: 20) {
-                    pageInfo {
-                      hasNextPage
-                      endCursor
-                    }
                     edges {
                       node {
                         oid
@@ -41,6 +38,27 @@ export default class RepoPage extends Component {
                           avatarUrl
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+            refs(first: 20, refPrefix:"refs/heads/") {
+              edges {
+                node {
+                  associatedPullRequests(last:1) {
+                    nodes {
+                      additions
+                      deletions
+                      state
+                    }
+                  }
+                  name
+                  target {
+                    ... on Commit {
+                      abbreviatedOid
+                      message
+                      committedDate
                     }
                   }
                 }
@@ -99,7 +117,7 @@ export default class RepoPage extends Component {
         case 'commits':
           return <RepoCommits commits={repo.ref.target.history.edges} />;
         case 'branches':
-          return <h1>branches</h1>;
+          return <RepoBranches branches={repo.refs.edges} />;
         case 'issues':
           return <h1>issues</h1>;
         case 'revisions':

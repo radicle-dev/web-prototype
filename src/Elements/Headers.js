@@ -6,6 +6,7 @@ export const BigHeader = styled.div`
   color: ${colors.black};
   font-size: 24px;
   line-height: 32px;
+  height: 36px;
 `;
 export const MediumHeader = styled.div`
   font-family: GTAmericaBold;

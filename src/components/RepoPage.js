@@ -8,6 +8,7 @@ import RepoSource from './RepoSource';
 import RepoCommits from './RepoCommits';
 import RepoBranches from './RepoBranches';
 import RepoIssues from './RepoIssues';
+import RepoRevisions from './RepoRevisions';
 import SideBar from './SideBar';
 
 export default class RepoPage extends Component {
@@ -98,6 +99,21 @@ export default class RepoPage extends Component {
                 }
               }
             }
+            pullRequests(last: 20){
+              edges {
+                node {
+                  author {
+                    login
+                  }
+                  closed
+                  id
+                  number
+                  mergeable
+                  title
+                  createdAt
+                }
+              }
+            }
           }
         }
       `,
@@ -117,7 +133,7 @@ export default class RepoPage extends Component {
         case 'overview':
           return (
             <Fragment>
-              <RepoOverview {...repo} />
+              <RepoOverview {...repo} issues={repo.issues.edges} revisions={repo.pullRequests.edges} />
               <RepoSource repo={repo} />
             </Fragment>
           );
@@ -130,7 +146,7 @@ export default class RepoPage extends Component {
         case 'issues':
           return <RepoIssues issues={repo.issues.edges} />;
         case 'revisions':
-          return <h1>revisions</h1>;
+          return <RepoRevisions revisions={repo.pullRequests.edges} />;
         case 'settings':
           return <h1>settings</h1>;
         default:

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import IssueListItem from './IssueListItem';
+import RevisionListItem from './RevisionListItem';
 import { colors } from '../utils';
-import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../elements';
+import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select } from '../elements';
 
-const RepoOverview = ({ name, description }) => (
+const RepoOverview = ({ name, description, issues, revisions }) => (
   <FloatingCard>
     <CardHeader>
       <BigHeader>{name}</BigHeader>
@@ -23,9 +24,13 @@ const RepoOverview = ({ name, description }) => (
           <Select>Today</Select>
         </CardHeader>
         <QuickInfoListContainer>
-          <IssueListItem />
-          <IssueListItem />
-          <IssueListItem />
+          {issues
+            .filter(issue => issue.node.closed === false)
+            .sort((a, b) => a.node.publishedAt < b.node.publishedAt)
+            .slice(0, 3)
+            .map(issue => (
+              <IssueListItem {...issue.node} key={issue.node.id} />
+            ))}
           <LoadMore>View all issues</LoadMore>
         </QuickInfoListContainer>
       </OutlineCard>
@@ -34,30 +39,13 @@ const RepoOverview = ({ name, description }) => (
           <BigHeader>Open Revisions</BigHeader>
         </CardHeader>
         <QuickInfoListContainer>
-          <QuickRevision>
-            <Icon name="revisions" />
-            <div>
-              <RevisionTitle>Add support for styled-components</RevisionTitle>
-              <RevisionDesc>#4 opened 2 days ago by juliendonck</RevisionDesc>
-            </div>
-            <RevisionLabel pass>Ready to merge</RevisionLabel>
-          </QuickRevision>
-          <QuickRevision>
-            <Icon name="revisions" />
-            <div>
-              <RevisionTitle>new api endpoint for issues</RevisionTitle>
-              <RevisionDesc>#3 opened 2 days ago by juliendonck</RevisionDesc>
-            </div>
-            <RevisionLabel>Tests Failed</RevisionLabel>
-          </QuickRevision>
-          <QuickRevision>
-            <Icon name="revisions" />
-            <div>
-              <RevisionTitle>Reformatted time since</RevisionTitle>
-              <RevisionDesc>#2 opened 4 days ago by Tomas</RevisionDesc>
-            </div>
-            <RevisionLabel>Tests Failed</RevisionLabel>
-          </QuickRevision>
+          {revisions
+            .filter(revision => revision.node.closed === false)
+            .sort((a, b) => a.node.publishedAt < b.node.publishedAt)
+            .slice(0, 3)
+            .map(revision => (
+              <RevisionListItem {...revision.node} key={revision.node.id} />
+            ))}
           <LoadMore>View all revisions</LoadMore>
         </QuickInfoListContainer>
       </OutlineCard>
@@ -70,6 +58,8 @@ RepoOverview.defaultProps = {
 };
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
+  issues: PropTypes.object.isRequired,
+  revisions: PropTypes.object.isRequired,
   description: PropTypes.string,
 };
 
@@ -89,31 +79,6 @@ const QuickInfo = styled.div`
   grid-gap: 24px;
   padding: 0 24px 24px 24px;
 `;
-
-const QuickRevision = styled.div`
-  display: grid;
-  grid-template-columns: 24px auto 148px;
-  grid-gap: 12px;
-  border-bottom: 1px solid ${colors.lightGrey};
-  padding: 16px;
-`;
-const RevisionTitle = styled.h3`
-  font-family: GTAmericaMedium;
-  margin: 4px 0 6px 0;
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-`;
-const RevisionDesc = styled.p`
-  color: ${colors.grey};
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-`;
 const LoadMore = styled.div`
   font-family: GTAmericaMedium;
   display: flex;
@@ -123,9 +88,6 @@ const LoadMore = styled.div`
   align-items: center;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-`;
-const RevisionLabel = styled(BigLabel)`
-  align-self: center;
 `;
 
 export default RepoOverview;

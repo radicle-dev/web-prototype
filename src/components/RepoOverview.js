@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import IssueListItem from './IssueListItem';
 import { colors } from '../utils';
 import { BigHeader, FloatingCard, OutlineCard, CardHeader, SecondaryButton, Select, Icon, BigLabel } from '../elements';
 
@@ -22,27 +23,9 @@ const RepoOverview = ({ name, description }) => (
           <Select>Today</Select>
         </CardHeader>
         <QuickInfoListContainer>
-          <QuickIssue>
-            <Icon name="issues" />
-            <div>
-              <IssueTitle>Radicle extras package</IssueTitle>
-              <IssueDesc>#82 opened 11 days ago by jameshaydon</IssueDesc>
-            </div>
-          </QuickIssue>
-          <QuickIssue>
-            <Icon name="issues" />
-            <div>
-              <IssueTitle>Split server into CentralChain, and ChainApi</IssueTitle>
-              <IssueDesc>#81 opened 11 days ago by jameshaydon</IssueDesc>
-            </div>
-          </QuickIssue>
-          <QuickIssue>
-            <Icon name="issues" />
-            <div>
-              <IssueTitle>Config file not found when not using XDG_*</IssueTitle>
-              <IssueDesc>#78 opened 11 days ago by jkarni</IssueDesc>
-            </div>
-          </QuickIssue>
+          <IssueListItem />
+          <IssueListItem />
+          <IssueListItem />
           <LoadMore>View all issues</LoadMore>
         </QuickInfoListContainer>
       </OutlineCard>
@@ -106,30 +89,7 @@ const QuickInfo = styled.div`
   grid-gap: 24px;
   padding: 0 24px 24px 24px;
 `;
-const QuickIssue = styled.div`
-  display: grid;
-  grid-template-columns: 24px auto;
-  grid-gap: 12px;
-  border-bottom: 1px solid ${colors.lightGrey};
-  padding: 16px;
-`;
-const IssueTitle = styled.h3`
-  font-family: GTAmericaMedium;
-  margin: 4px 0 6px 0;
-  max-width: 460px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-`;
-const IssueDesc = styled.p`
-  color: ${colors.grey};
-  max-width: 460px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-`;
+
 const QuickRevision = styled.div`
   display: grid;
   grid-template-columns: 24px auto 148px;

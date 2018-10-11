@@ -11,7 +11,7 @@ const OrgSource = ({ repos }) => (
     <CardHeader>
       <BigHeader>Repositories</BigHeader>
       <div>
-        <Filter margin value="Filter" readOnly />
+        <Filter marginRight value="Filter" readOnly />
         <PrimaryButton>New repository</PrimaryButton>
       </div>
     </CardHeader>

@@ -9,7 +9,7 @@ const OrgMembers = ({ members }) => (
     <CardHeader underline>
       <BigHeader>Members</BigHeader>
       <div>
-        <Filter margin value="Filter" readOnly />
+        <Filter marginRight value="Filter" readOnly />
         <PrimaryButton>Add member</PrimaryButton>
       </div>
     </CardHeader>

@@ -1,27 +1,43 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '../utils';
 
-const Picker = () => (
-  <PickerContainer>
-    <Item active>Overview</Item>
-    <Item>Active</Item>
-    <Item>Stale</Item>
-    <Item>All branches</Item>
+const Picker = ({ items, marginLeft, marginRight }) => (
+  <PickerContainer marginLeft={marginLeft} marginRight={marginRight}>
+    {items.map((item, index) => (
+      <Item active={index === 0} key={item}>
+        {item}
+      </Item>
+    ))}
   </PickerContainer>
 );
+
+Picker.defaultProps = {
+  items: ['item 1', 'item 2'],
+  marginLeft: false,
+  marginRight: false,
+};
+Picker.propTypes = {
+  items: PropTypes.array,
+  marginLeft: PropTypes.bool,
+  marginRight: PropTypes.bool,
+};
 
 const PickerContainer = styled.div`
   display: flex;
   border-radius: 4px;
   border: 1px solid ${colors.lightGrey};
   background-color: ${colors.almostWhite};
-  display: flex;
-  align-items: center;
-  ${({ margin }) =>
-    margin &&
+  ${({ marginRight }) =>
+    marginRight &&
     `
     margin-right: 16px;
+  `};
+  ${({ marginLeft }) =>
+    marginLeft &&
+    `
+    margin-left: 16px;
   `};
 `;
 const Item = styled.p`

@@ -9,9 +9,14 @@ export default styled.input`
   background-color: ${colors.almostWhite};
   padding: 0 12px 4px 12px;
   color: ${colors.darkGrey};
-  ${({ margin }) =>
-    margin &&
+  ${({ marginRight }) =>
+    marginRight &&
     `
     margin-right: 16px;
+  `};
+  ${({ marginLeft }) =>
+    marginLeft &&
+    `
+    margin-left: 16px;
   `};
 `;

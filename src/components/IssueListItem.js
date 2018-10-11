@@ -26,7 +26,7 @@ IssueListItem.defaultProps = {
 };
 IssueListItem.propTypes = {
   title: PropTypes.string,
-  author: PropTypes.object,
+  author: PropTypes.string,
   number: PropTypes.number,
   id: PropTypes.string,
   publishedAt: PropTypes.string,
@@ -38,6 +38,9 @@ const QuickIssue = styled.div`
   grid-gap: 12px;
   border-bottom: 1px solid ${colors.lightGrey};
   padding: 16px;
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 const IssueTitle = styled.h3`
   font-family: GTAmericaMedium;

@@ -38,6 +38,9 @@ const ListItem = styled.div`
     padding-bottom: 3px;
   }
   border-bottom: 1px solid ${colors.lightGrey};
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const Avatar = styled.img`

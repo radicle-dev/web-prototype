@@ -58,8 +58,8 @@ RepoOverview.defaultProps = {
 };
 RepoOverview.propTypes = {
   name: PropTypes.string.isRequired,
-  issues: PropTypes.object.isRequired,
-  revisions: PropTypes.object.isRequired,
+  issues: PropTypes.array.isRequired,
+  revisions: PropTypes.array.isRequired,
   description: PropTypes.string,
 };
 

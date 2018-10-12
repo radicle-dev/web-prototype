@@ -30,6 +30,9 @@ const ListItem = styled.div`
   padding: 0 24px;
   align-items: center;
   border-bottom: 1px solid ${colors.lightGrey};
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const Avatar = styled.img`

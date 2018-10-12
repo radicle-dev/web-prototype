@@ -31,7 +31,6 @@ const MembersGridContainer = styled.div`
   grid-template-columns: 1fr;
   margin: 0 auto;
   max-width: 100%;
-  padding-bottom: 12px;
 `;
 
 export default OrgMembers;

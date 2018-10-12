@@ -35,7 +35,6 @@ const RepoGridContainer = styled.div`
   grid-template-rows: 36px 48px;
   margin: 0 auto;
   max-width: 100%;
-  padding-bottom: 12px;
 `;
 
 export default OrgSource;

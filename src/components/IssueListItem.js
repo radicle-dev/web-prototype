@@ -19,14 +19,14 @@ const IssueListItem = ({ title, author, number, publishedAt, id }) => (
 
 IssueListItem.defaultProps = {
   title: 'issue descriptiom',
-  author: 'author',
+  author: { login: 'author' },
   number: '#0',
   id: '#0',
   publishedAt: '2018-08-23T09:27:37Z',
 };
 IssueListItem.propTypes = {
   title: PropTypes.string,
-  author: PropTypes.string,
+  author: PropTypes.object,
   number: PropTypes.number,
   id: PropTypes.string,
   publishedAt: PropTypes.string,

@@ -13,8 +13,11 @@ const Layout = ({ children, sidebar }) => (
   </Wrapper>
 );
 
+Layout.defaultProps = {
+  children: {},
+};
 Layout.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object,
   sidebar: PropTypes.object.isRequired,
 };
 

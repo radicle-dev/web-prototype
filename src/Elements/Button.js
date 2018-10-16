@@ -42,10 +42,15 @@ export const PrimaryButton = styled.button`
       box-shadow: none;
     `};
   }
-  ${({ margin }) =>
-    margin &&
+  ${({ marginRight }) =>
+    marginRight &&
     `
     margin-right: 16px;
+  `};
+  ${({ marginLeft }) =>
+    marginLeft &&
+    `
+    margin-left: 16px;
   `};
 `;
 

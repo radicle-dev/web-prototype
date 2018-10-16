@@ -5,7 +5,7 @@ import { FloatingCard, CardHeader, Picker, BigHeader, Filter, PrimaryButton } fr
 import { colors } from '../utils';
 import IssueListItem from './IssueListItem';
 
-const RepoIssues = ({ issues }) => (
+const RepoIssues = ({ repoName, issues }) => (
   <Fragment>
     {issues && (
       <Fragment>
@@ -27,7 +27,7 @@ const RepoIssues = ({ issues }) => (
               .filter(issue => issue.node.closed === false)
               .sort((a, b) => a.node.publishedAt < b.node.publishedAt)
               .map(issue => (
-                <IssueListItem {...issue.node} key={issue.node.id} />
+                <IssueListItem {...issue.node} repoName={repoName} key={issue.node.id} />
               ))}
           </IssueList>
         </FloatingCard>
@@ -38,6 +38,7 @@ const RepoIssues = ({ issues }) => (
 
 RepoIssues.propTypes = {
   issues: PropTypes.array.isRequired,
+  repoName: PropTypes.string.isRequired,
 };
 const IssueList = styled.div`
   border-top: 1px solid ${colors.lightGrey};

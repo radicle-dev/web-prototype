@@ -90,6 +90,27 @@ export default class RepoPage extends Component {
                       }
                     }
                   }
+                  labels(first: 10) {
+                    edges {
+                      node {
+                        color
+                        description
+                        name
+                      }
+                    }
+                  }
+                  comments(first: 30) {
+                    edges{
+                      node {
+                        author {
+                          login
+                        }
+                        body
+                        createdAt
+                        id
+                      }
+                    }
+                  }
                   closed
                   title
                   bodyText
@@ -144,7 +165,7 @@ export default class RepoPage extends Component {
         case 'branches':
           return <RepoBranches branches={repo.refs.edges} />;
         case 'issues':
-          return <RepoIssues issues={repo.issues.edges} />;
+          return <RepoIssues repoName={repo.name} issues={repo.issues.edges} />;
         case 'revisions':
           return <RepoRevisions revisions={repo.pullRequests.edges} />;
         case 'settings':

@@ -12,7 +12,7 @@ const RepoSource = ({ repo }) => (
         <CardHeader>
           <Select>master</Select>
           <div>
-            <SecondaryButton margin>Open in workspace</SecondaryButton>
+            <SecondaryButton marginRight>Open in workspace</SecondaryButton>
             <PrimaryButton>Clone</PrimaryButton>
           </div>
         </CardHeader>

@@ -11,8 +11,8 @@ const RepoOverview = ({ name, description, issues, revisions }) => (
     <CardHeader>
       <BigHeader>{name}</BigHeader>
       <div>
-        <SecondaryButton margin>Favourite</SecondaryButton>
-        <SecondaryButton margin>Support</SecondaryButton>
+        <SecondaryButton marginRight>Favourite</SecondaryButton>
+        <SecondaryButton marginRight>Support</SecondaryButton>
         <SecondaryButton>Fork</SecondaryButton>
       </div>
     </CardHeader>

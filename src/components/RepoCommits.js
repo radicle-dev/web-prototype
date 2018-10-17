@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FloatingCard, CardHeader, Select, Filter } from '../elements';
 import CommitListItem from './CommitListItem';
 
 const RepoCommits = ({ commits }) => (
-  <Fragment>
+  <>
     {commits && (
-      <Fragment>
+      <>
         <FloatingCard>
           <CardHeader>
             <Select>master</Select>
@@ -27,9 +27,9 @@ const RepoCommits = ({ commits }) => (
             ))}
           </CommitsList>
         </FloatingCard>
-      </Fragment>
+      </>
     )}
-  </Fragment>
+  </>
 );
 
 RepoCommits.propTypes = {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Timestamp from 'react-timestamp';
@@ -6,9 +6,9 @@ import { FloatingCard, CardHeader, Picker, BigHeader, Filter, PrimaryButton, Ico
 import { colors } from '../utils';
 
 const RepoBranches = ({ branches }) => (
-  <Fragment>
+  <>
     {branches && (
-      <Fragment>
+      <>
         <FloatingCard>
           <CardHeader>
             <Picker items={['Overview', 'Active', 'Stale', 'All branches']}>master</Picker>
@@ -41,9 +41,9 @@ const RepoBranches = ({ branches }) => (
               ))}
           </BranchesList>
         </FloatingCard>
-      </Fragment>
+      </>
     )}
-  </Fragment>
+  </>
 );
 
 RepoBranches.propTypes = {

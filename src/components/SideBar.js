@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import { Icon } from '../elements';
 const SideBar = ({ org, repoId }) => (
   <SideBarContainer>
     {org ? (
-      <Fragment>
+      <>
         <li>
           <SideBarItem activeClassName="active" to="/overview">
             <Icon name="overview" />
@@ -33,9 +33,9 @@ const SideBar = ({ org, repoId }) => (
             <p>Settings</p>
           </SideBarItem>
         </li>
-      </Fragment>
+      </>
     ) : (
-      <Fragment>
+      <>
         <li>
           <SideBarItem activeClassName="active" to={`/repo/${repoId}/overview`}>
             <Icon name="overview" />
@@ -78,7 +78,7 @@ const SideBar = ({ org, repoId }) => (
             <p>Settings</p>
           </SideBarItem>
         </li>
-      </Fragment>
+      </>
     )}
   </SideBarContainer>
 );

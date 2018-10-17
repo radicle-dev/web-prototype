@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FloatingCard, CardHeader, SecondaryButton, Select, PrimaryButton } from '../elements';
@@ -6,7 +6,7 @@ import SourceListHeader from './SourceListHeader';
 import SourceListItem from './SourceListItem';
 
 const RepoSource = ({ repo }) => (
-  <Fragment>
+  <>
     {repo && (
       <FloatingCard>
         <CardHeader>
@@ -27,7 +27,7 @@ const RepoSource = ({ repo }) => (
         </SourceBrowser>
       </FloatingCard>
     )}
-  </Fragment>
+  </>
 );
 
 RepoSource.propTypes = {

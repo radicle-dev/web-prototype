@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { Toggle, colors, elevation } from '../utils';
@@ -8,7 +8,7 @@ const ProjectPicker = () => (
   <ProjectPickerContainer>
     <Toggle>
       {({ on, toggle }) => (
-        <Fragment>
+        <>
           <ProjectPickerButton onClick={toggle}>
             <OrgIcon />
             <p>oscoin</p>
@@ -27,7 +27,7 @@ const ProjectPicker = () => (
               </NavItem>
             </Dropdown>
           )}
-        </Fragment>
+        </>
       )}
     </Toggle>
   </ProjectPickerContainer>

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FloatingCard, CardHeader, Picker, BigHeader, Filter, PrimaryButton } from '../elements';
@@ -6,9 +6,9 @@ import { colors } from '../utils';
 import RevisionListItem from './RevisionListItem';
 
 const RepoRevisions = ({ revisions }) => (
-  <Fragment>
+  <>
     {revisions && (
-      <Fragment>
+      <>
         <FloatingCard>
           <StyledHeader>
             <div>
@@ -29,9 +29,9 @@ const RepoRevisions = ({ revisions }) => (
               ))}
           </List>
         </FloatingCard>
-      </Fragment>
+      </>
     )}
-  </Fragment>
+  </>
 );
 
 RepoRevisions.propTypes = {

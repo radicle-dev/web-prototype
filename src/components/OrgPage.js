@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SideBar from './SideBar';
 import OrgOverview from './OrgOverview';
@@ -12,11 +12,11 @@ const OrgPage = ({ data, selectedView }) => {
     switch (selectedView) {
       case 'overview':
         return (
-          <Fragment>
+          <>
             <OrgOverview orgName={data.name} orgIcon={data.avatarUrl} orgDesc={data.description} />
             <OrgSource repos={data.repositories.nodes} />
             <OrgMembers members={data.members.nodes} />
-          </Fragment>
+          </>
         );
       case 'repositories':
         return <OrgSource repos={data.repositories.nodes} />;

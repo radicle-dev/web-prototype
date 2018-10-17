@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'styled-components';
 import gql from 'graphql-tag';
@@ -64,7 +64,7 @@ export default class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <Fragment>
+      <>
         {data && (
           <BrowserRouter>
             <Switch>
@@ -130,7 +130,7 @@ export default class App extends Component {
             </Switch>
           </BrowserRouter>
         )}
-      </Fragment>
+      </>
     );
   }
 }

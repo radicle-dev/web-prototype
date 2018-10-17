@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import GithubClient from '../github-graphql';
@@ -96,6 +96,7 @@ export default class RepoPage extends Component {
                         color
                         description
                         name
+                        id
                       }
                     }
                   }
@@ -153,10 +154,10 @@ export default class RepoPage extends Component {
       switch (selectedView) {
         case 'overview':
           return (
-            <Fragment>
+            <>
               <RepoOverview {...repo} issues={repo.issues.edges} revisions={repo.pullRequests.edges} />
               <RepoSource repo={repo} />
-            </Fragment>
+            </>
           );
         case 'source':
           return <RepoSource repo={repo} />;
@@ -174,7 +175,7 @@ export default class RepoPage extends Component {
           return null;
       }
     };
-    return <Fragment>{repo && <Layout sidebar={<SideBar repoId={repo.name} />}>{content()}</Layout>}</Fragment>;
+    return <>{repo && <Layout sidebar={<SideBar repoId={repo.name} />}>{content()}</Layout>}</>;
   }
 }
 

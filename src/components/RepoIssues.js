@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FloatingCard, CardHeader, Picker, BigHeader, Filter, PrimaryButton } from '../elements';
@@ -6,9 +6,9 @@ import { colors } from '../utils';
 import IssueListItem from './IssueListItem';
 
 const RepoIssues = ({ repoName, issues }) => (
-  <Fragment>
+  <>
     {issues && (
-      <Fragment>
+      <>
         <FloatingCard>
           <StyledHeader>
             <div>
@@ -31,9 +31,9 @@ const RepoIssues = ({ repoName, issues }) => (
               ))}
           </IssueList>
         </FloatingCard>
-      </Fragment>
+      </>
     )}
-  </Fragment>
+  </>
 );
 
 RepoIssues.propTypes = {

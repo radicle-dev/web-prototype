@@ -151,6 +151,7 @@ injectGlobal([
     font-size: 100%;
     font: inherit;
     color: inherit;
+    font-kerning: normal;
     text-decoration: none;
     vertical-align: baseline;
     background-color: transparent;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Timestamp from 'react-timestamp';
 import styled from 'styled-components';
 import { colors, elevation } from '../utils';
-import { Icon } from '../elements';
+import { Icon, IssueLabel } from '../elements';
 
 const IssueListItem = ({ title, author, number, publishedAt, id, repoName, assignees, labels, comments }) => (
   <IssueContainer to={`/repo/${repoName}/issues/${number}`} key={id}>
@@ -13,7 +13,11 @@ const IssueListItem = ({ title, author, number, publishedAt, id, repoName, assig
       <IssueTitle>
         <h3>{title}</h3>
         {labels.edges.length > 0 &&
-          labels.edges.map(label => <Label color={label.node.color}>{label.node.name}</Label>)}
+          labels.edges.map(label => (
+            <IssueLabel key={label.node.id} labelColor={label.node.color}>
+              {label.node.name}
+            </IssueLabel>
+          ))}
       </IssueTitle>
       <IssueDesc>
         {number} opened <Timestamp time={publishedAt} /> by {author.login}
@@ -69,23 +73,8 @@ const IssueTitle = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     height: 22px;
-    margin: 4px 0 6px 0;
+    margin: 4px 8px 6px 0;
   }
-`;
-
-const Label = styled.span`
-  ${({ color }) =>
-    color &&
-    `
-    background-color: #${color};
-  `};
-  font-family: GTAmericaMedium;
-  padding: 4px 8px 0 8px;
-  margin-left: 8px;
-  border-radius: 2px;
-  height: 28px;
-  color: ${colors.white};
-  white-space: nowrap;
 `;
 const IssueDesc = styled.p`
   color: ${colors.grey};

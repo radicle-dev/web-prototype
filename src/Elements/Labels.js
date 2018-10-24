@@ -10,6 +10,7 @@ export const SmallLabel = styled.p`
   justify-self: end;
   font-family: GTAmericaMedium;
 `;
+
 export const BigLabel = styled.p`
   ${({ pass }) =>
     pass
@@ -27,4 +28,19 @@ export const BigLabel = styled.p`
   justify-self: end;
   height: 36px;
   font-family: GTAmericaMedium;
+`;
+
+export const IssueLabel = styled.span`
+  ${({ labelColor }) =>
+    labelColor &&
+    `
+    background-color: #${labelColor};
+    color: ${colors.invertColor(labelColor, true)};
+  `};
+  font-family: GTAmericaMedium;
+  padding: 2px 8px 4px 8px;
+  border-radius: 2px;
+  height: 24px;
+  white-space: nowrap;
+  margin-right: 8px;
 `;

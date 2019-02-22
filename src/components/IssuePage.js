@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import Timestamp from 'react-timestamp';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
 import GithubClient from '../github-graphql';
 import SideBar from './SideBar';
 import {
@@ -14,8 +15,9 @@ import {
   SecondaryButton,
   PrimaryButton,
   Icon,
+  IssueLabel,
 } from '../elements';
-import { colors, elevation } from '../utils';
+import { colors, elevation, mentionParser } from '../utils';
 
 export default class IssuePage extends Component {
   state = {
@@ -55,6 +57,7 @@ export default class IssuePage extends Component {
                     color
                     description
                     name
+                    id
                   }
                 }
               }
@@ -63,6 +66,7 @@ export default class IssuePage extends Component {
                   node {
                     author {
                       login
+                      avatarUrl
                     }
                     body
                     createdAt
@@ -88,7 +92,7 @@ export default class IssuePage extends Component {
     return (
       <Layout sidebar={<SideBar repoId={match.params.repoId} />}>
         {issue && (
-          <Fragment>
+          <>
             <FloatingCard>
               <CardHeader>
                 <div>
@@ -112,50 +116,70 @@ export default class IssuePage extends Component {
             </FloatingCard>
             <BodyContainer>
               <MainContainer>
-                <FloatingSectionCard>
-                  <SmallHeader>Description</SmallHeader>
-                  <IssueDesc>{issue.body}</IssueDesc>
-                </FloatingSectionCard>
-                <FloatingSectionCard>
-                  <SmallHeader>Comments</SmallHeader>
-                  {issue.comments.edges.length > 0 && issue.comments.edges.map(comment => <p>{comment.node.body}</p>)}
-                  <NewComment>
-                    <AvatarLarge src="https://res.cloudinary.com/juliendonck/image/upload/v1536080565/avatars/2326909.jpg" />
-                    <NewCommentInput
-                      type="text"
-                      name="comment"
-                      placeholder="Add your comment here or drop files to attach them."
-                      // onChange={}
-                      // value={}
-                      autoFocus
-                    />
-                  </NewComment>
-                  <BtnContainer>
-                    <PlusIcon>
-                      <Icon name="plus" />
-                    </PlusIcon>
-                    <PrimaryButton marginLeft>Comment</PrimaryButton>
-                  </BtnContainer>
-                </FloatingSectionCard>
+                <SmallHeader>Description</SmallHeader>
+                <IssueDesc>
+                  <ReactMarkdown source={issue.body} />
+                </IssueDesc>
+                {issue.comments.edges.length > 0 &&
+                  issue.comments.edges.map(comment => (
+                    <Comment key={comment.node.id}>
+                      <AvatarLarge src={comment.node.author.avatarUrl} />
+                      <div>
+                        <CommentBox>
+                          <CommentMeta>
+                            {comment.node.author.login}
+                            <span> wrote </span>
+                            <Timestamp time={comment.node.createdAt} />
+                          </CommentMeta>
+                          <ReactMarkdown source={comment.node.body} />
+                        </CommentBox>
+                      </div>
+                    </Comment>
+                  ))}
+                <NewComment>
+                  <AvatarLarge src="https://res.cloudinary.com/juliendonck/image/upload/v1536080565/avatars/2326909.jpg" />
+                  <NewCommentInput
+                    type="text"
+                    name="comment"
+                    placeholder="Add your comment here or drop files to attach them."
+                    // onChange={}
+                    // value={}
+                    autoFocus
+                  />
+                </NewComment>
+                <BtnContainer>
+                  <PlusIcon>
+                    <Icon name="plus" />
+                  </PlusIcon>
+                  <PrimaryButton marginLeft>Comment</PrimaryButton>
+                </BtnContainer>
               </MainContainer>
-              <SideTopContainer>
-                <FloatingSectionCard>
-                  <SmallHeader>Assignees</SmallHeader>
+              <SideContainer>
+                <SmallHeader>Assignees</SmallHeader>
+                <Assignees>
                   {issue.assignees.edges.length > 0 &&
                     issue.assignees.edges.map(assignee => (
                       <Avatar key={assignee.node.avatarUrl} src={assignee.node.avatarUrl} />
                     ))}
-                </FloatingSectionCard>
-              </SideTopContainer>
-              <SideBottomContainer>
-                <FloatingSectionCard>
-                  <SmallHeader>Labels</SmallHeader>
+                  <AddNew>
+                    <Icon name="plus" />
+                  </AddNew>
+                </Assignees>
+                <SmallHeader>Labels</SmallHeader>
+                <Labels>
                   {issue.labels.edges.length > 0 &&
-                    issue.labels.edges.map(label => <Label color={label.node.color}>{label.node.name}</Label>)}
-                </FloatingSectionCard>
-              </SideBottomContainer>
+                    issue.labels.edges.map(label => (
+                      <IssueLabel key={label.node.id} labelColor={label.node.color}>
+                        {label.node.name}
+                      </IssueLabel>
+                    ))}
+                  <AddNew>
+                    <Icon name="plus" />
+                  </AddNew>
+                </Labels>
+              </SideContainer>
             </BodyContainer>
-          </Fragment>
+          </>
         )}
       </Layout>
     );
@@ -180,18 +204,13 @@ const IssueMeta = styled.h3`
   margin-top: 4px;
 `;
 const IssueDesc = styled.p`
-  color: ${colors.darkGrey};
+  color: ${colors.black};
   line-height: 125%;
+  padding-bottom: 24px;
 `;
 const Author = styled.p`
   font-family: GTAmericaMedium;
   margin: 0 5px 0 8px;
-`;
-const AvatarLarge = styled.img`
-  height: 36px;
-  width: 36px;
-  border-radius: 4px;
-  ${elevation[0]};
 `;
 const Avatar = styled.img`
   height: 24px;
@@ -199,6 +218,28 @@ const Avatar = styled.img`
   border-radius: 4px;
   ${elevation[0]};
 `;
+const AvatarLarge = styled(Avatar)`
+  height: 36px;
+  width: 36px;
+`;
+const Comment = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const CommentBox = styled.div`
+  line-height: 125%;
+  margin: 0 0 24px 16px;
+  > p {
+    &:hover:before {
+      content: 'hi';
+    }
+  }
+`;
+const CommentMeta = styled.div`
+  padding-bottom: 16px;
+  color: ${colors.darkGrey};
+`;
+
 const NewComment = styled.div`
   display: flex;
   flex-direction: row;
@@ -214,8 +255,9 @@ const NewCommentInput = styled.textarea`
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  background-color: ${colors.almostWhite};
+  /* background-color: ${colors.almostWhite}; */
   color: ${colors.black};
+  resize: none;
 `;
 const BtnContainer = styled.div`
   display: flex;
@@ -231,38 +273,39 @@ const PlusIcon = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const MainContainer = styled.div`
-  grid-area: main;
+const Assignees = styled.div`
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: row;
 `;
-const SideTopContainer = styled.div`
-  grid-area: st;
+const Labels = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
 `;
-const SideBottomContainer = styled.div`
-  grid-area: sb;
+const AddNew = styled(PlusIcon)`
+  height: 24px;
+  width: 24px;
+  border-color: ${colors.lightGrey};
 `;
 const BodyContainer = styled.div`
   display: grid;
-  max-width: 1156px;
+  max-width: 1180px;
+  margin-right: 24px;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(60px, auto);
+  grid-template-rows: 130px auto;
+  grid-gap: 24px;
   grid-template-areas:
     'main main main st'
-    'main main main sb';
+    'main main main st';
 `;
-const Label = styled.span`
-  ${({ color }) =>
-    color &&
-    `
-    background-color: #${color};
-  `};
-  font-family: GTAmericaMedium;
-  padding: 2px 8px 4px 8px;
-  border-radius: 2px;
-  height: 28px;
-  color: ${colors.white};
-  white-space: nowrap;
-`;
-
-const FloatingSectionCard = styled(FloatingCard)`
+const MainContainer = styled(FloatingCard)`
   padding: 24px;
+  margin: 0;
+  grid-area: main;
+`;
+const SideContainer = styled(FloatingCard)`
+  padding: 24px;
+  margin: 0;
+  grid-area: st;
 `;
